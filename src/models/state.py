@@ -1,5 +1,6 @@
-from typing import TypedDict, List
+from typing import TypedDict, List, Dict, Optional
 from src.models.models import Response
+from src.models.metrics import NodeMetrics
 
 
 class AgentState(TypedDict):
@@ -9,3 +10,4 @@ class AgentState(TypedDict):
     response: Response
     revision_number: int = 0
     max_revisions: int = 3
+    metrics: Optional[Dict[str, NodeMetrics]]
