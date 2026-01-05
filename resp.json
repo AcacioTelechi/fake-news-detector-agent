@@ -1,1 +1,43 @@
-{"post": "Cloroquina cura COVID", "plan": "Afirmações factuais:\n1. A cloroquina cura a COVID-19.\n\nBases factuais a serem verificadas:\n1. Evidências científicas de estudos clínicos que comprovem a eficácia da cloroquina no tratamento da COVID-19.\n2. Posicionamento de organizações de saúde reconhecidas, como a OMS e CDC, sobre o uso da cloroquina no tratamento da COVID-19.\n\nPriorização das afirmações mais críticas:\n- A afirmação de que a cloroquina cura a COVID-19 é a mais crítica, pois se for falsa, invalida completamente o post.\n\nPlano estruturado para pesquisa:\n1. Pesquisar por estudos clínicos e revisões sistemáticas que investigaram a eficácia da cloroquina no tratamento da COVID-19.\n2. Consultar sites de organizações de saúde, como a OMS e CDC, para verificar suas recomendações e posicionamentos sobre o uso da cloroquina no tratamento da COVID-19.", "content": ["Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, *optimal information size*) da evidência disponível. Três estudos incluíram somente participantes com alto risco de complicações, no entanto, os fatores de risco variaram entre os estudos.11–15,36 A maioria dos estudos (n=6) incluiu apenas participantes com COVID-19 confirmado por reação em cadeia da polimerase da transcrição reversa em tempo real (rRT-PCR).11–15,36 No entanto, dois estudos que incluíram participantes com base no resultado do rRT-PCR e critérios adicionais (IgG, IgM, ou sintomas compatíveis) apresentaram 69,0%16 e 54,0%19 dos participantes com confirmação por rRT-PCR (Tabela 1).16,19 Uma vez que a maioria dos participantes incluídos nos estudos tiveram confirmação por rRT-PCR, escolhemos considerar somente uma população similar do ensaio COPE, isto é, uma população com intenção de tratar (ITT) modificada (ITTm) em vez da população com ITT em todas as metanálises.", "2023; 120(4):e20220380 Artigo Original Hidroxicloroquina para Pacientes com COVID-19 não Hospitalizados: Uma Revisão Sistemática e Metanálise de Ensaios Clínicos Randomizados Hydroxychloroquine for Non-Hospitalized COVID-19 Patients: A Systematic Review and Meta-Analysis of Randomized Clinical Trials Rosa Lucchetta,1 Jessica Y. Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, optimal information size) da evidência disponível.", "Tanto o Ministério da Saúde quanto a OMS concluíram que a hidroxicloroquina não é eficaz como tratamento precoce para a Covid-19 e que seu uso", "ASSUNTO. 1.1. Uso da Cloroquina como terapia adjuvante no tratamento de formas graves do COVID-19. 2. JUSTIFICATIVA."], "response": {"score": 1.0, "justification": "A afirmação de que a cloroquina cura a COVID-19 é falsa e não é respaldada por evidências científicas de estudos clínicos. Tanto o Ministério da Saúde quanto a OMS concluíram que a hidroxicloroquina não é eficaz como tratamento precoce para a Covid-19."}, "max_revisions": 3, "metrics": {"planner": {"execution_time": 2.870068073272705, "prompt_tokens": 226, "completion_tokens": 235, "total_tokens": 461, "start_time": "2026-01-05T12:44:51.910380", "end_time": "2026-01-05T12:44:54.780449"}, "research": {"execution_time": 2.0759334564208984, "prompt_tokens": 483, "completion_tokens": 36, "total_tokens": 519, "start_time": "2026-01-05T12:44:54.780449", "end_time": "2026-01-05T12:44:56.856382"}, "analyst": {"execution_time": 0.9368219375610352, "prompt_tokens": 1254, "completion_tokens": 89, "total_tokens": 1343, "start_time": "2026-01-05T12:44:56.862671", "end_time": "2026-01-05T12:44:57.799493"}}}
+{
+    "post": "Cloroquina cura COVID",
+    "plan": "Afirmações factuais:\n1. A cloroquina cura a COVID-19.\n\nBases factuais a serem verificadas:\n1. Evidências científicas de estudos clínicos que comprovem a eficácia da cloroquina no tratamento da COVID-19.\n2. Posicionamento de organizações de saúde reconhecidas, como a OMS e CDC, sobre o uso da cloroquina no tratamento da COVID-19.\n\nPriorização das afirmações mais críticas:\n- A única afirmação presente no post é a de que a cloroquina cura a COVID-19. Portanto, essa é a afirmação mais crítica a ser verificada, pois se for falsa, invalidaria completamente o post.\n\nPlano estruturado para pesquisa:\n1. Pesquisar por estudos clínicos e revisões sistemáticas que investigaram a eficácia da cloroquina no tratamento da COVID-19.\n2. Consultar sites de organizações de saúde, como a OMS e CDC, para verificar suas recomendações e posicionamentos sobre o uso da cloroquina no tratamento da COVID-19.\n3. Verificar se há consenso na comunidade científica sobre a eficácia da cloroquina no tratamento da COVID-19.\n4. Analisar se há relatos de casos ou evidências anedóticas que sustentem a afirmação de que a cloroquina cura a COVID-19.",
+    "content": [
+        "Efetividade e toxicidade da cloroquina e da hidroxicloroquina associada (ou não) à azitromicina para tratamento da COVID-19. O que sabemos até o",
+        "by B Singh · 2021 · Cited by 306 — Não devem ser realizados mais ensaios clínicos com hidroxicloroquina ou cloroquina para o tratamento da COVID‐19. Os resultados desta",
+        "OMS: Hidroxicloroquina não funciona contra Covid-19 e pode causar efeito adverso. Especialistas da Organização Mundial da Saúde afirmam que",
+        "A presente resenha de política pretende resumir perspectivas emanando da comunidade científica no que diz respeito à utilização de CQ/HCQ no tratamento da COVID",
+        "... científica sobre la efectividad y la seguridad de la cloroquina y sus derivados. La presente revisión sistemática exploratoria aspira a comunicar al público",
+        "by EC Rodríguez Venegas · 2020 · Cited by 1 — Objetivo: Describir seguridad de la cloroquina e hidroxicloroquina para el tratamiento de la COVID-19 según la evidencia científica actual."
+    ],
+    "response": {
+        "score": 1.0,
+        "justification": "Com base nas evidências científicas e nos posicionamentos de organizações de saúde reconhecidas, como a OMS, é altamente improvável que a cloroquina cure a COVID-19. Estudos e especialistas afirmam que a cloroquina não é eficaz no tratamento da doença e pode causar efeitos adversos."
+    },
+    "max_revisions": 3,
+    "metrics": {
+        "planner": {
+            "execution_time": 3.315234899520874,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "start_time": "2026-01-05T12:31:46.708519",
+            "end_time": "2026-01-05T12:31:50.023754"
+        },
+        "research": {
+            "execution_time": 5.522015333175659,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "start_time": "2026-01-05T12:31:50.024763",
+            "end_time": "2026-01-05T12:31:55.546778"
+        },
+        "analyst": {
+            "execution_time": 1.5386226177215576,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+            "start_time": "2026-01-05T12:31:55.546778",
+            "end_time": "2026-01-05T12:31:57.085401"
+        }
+    }
+}
