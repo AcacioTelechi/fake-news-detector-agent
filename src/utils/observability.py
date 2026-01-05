@@ -71,8 +71,6 @@ class UsageMetadataCallbackHandler(BaseCallbackHandler):
         prompt_tokens = 0
         completion_tokens = 0
         total_tokens = 0
-
-        print(f"get_tokens_for_node[usage_metadata]: {self.usage_metadata}")
         
         for usage in self.usage_metadata:
             if usage.get("node") == node_name:

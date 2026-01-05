@@ -1,43 +1,133 @@
-{
-    "post": "Cloroquina cura COVID",
-    "plan": "Afirmações factuais:\n1. A cloroquina cura a COVID-19.\n\nBases factuais a serem verificadas:\n1. Evidências científicas de estudos clínicos que comprovem a eficácia da cloroquina no tratamento da COVID-19.\n2. Posicionamento de organizações de saúde reconhecidas, como a OMS e CDC, sobre o uso da cloroquina no tratamento da COVID-19.\n\nPriorização das afirmações mais críticas:\n- A afirmação de que a cloroquina cura a COVID-19 é a mais crítica, pois se for falsa, invalida completamente o post.\n\nPlano estruturado para pesquisa:\n1. Pesquisar por estudos clínicos e revisões sistemáticas que investigaram a eficácia da cloroquina no tratamento da COVID-19.\n2. Consultar as diretrizes e recomendações de organizações de saúde, como a OMS e CDC, sobre o uso da cloroquina no contexto da pandemia de COVID-19.",
-    "content": [
-        "Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, *optimal information size*) da evidência disponível. Três estudos incluíram somente participantes com alto risco de complicações, no entanto, os fatores de risco variaram entre os estudos.11–15,36 A maioria dos estudos (n=6) incluiu apenas participantes com COVID-19 confirmado por reação em cadeia da polimerase da transcrição reversa em tempo real (rRT-PCR).11–15,36 No entanto, dois estudos que incluíram participantes com base no resultado do rRT-PCR e critérios adicionais (IgG, IgM, ou sintomas compatíveis) apresentaram 69,0%16 e 54,0%19 dos participantes com confirmação por rRT-PCR (Tabela 1).16,19 Uma vez que a maioria dos participantes incluídos nos estudos tiveram confirmação por rRT-PCR, escolhemos considerar somente uma população similar do ensaio COPE, isto é, uma população com intenção de tratar (ITT) modificada (ITTm) em vez da população com ITT em todas as metanálises.",
-        "2023; 120(4):e20220380 Artigo Original Hidroxicloroquina para Pacientes com COVID-19 não Hospitalizados: Uma Revisão Sistemática e Metanálise de Ensaios Clínicos Randomizados Hydroxychloroquine for Non-Hospitalized COVID-19 Patients: A Systematic Review and Meta-Analysis of Randomized Clinical Trials Rosa Lucchetta,1 Jessica Y. Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, optimal information size) da evidência disponível.",
-        "2023; 120(4):e20220380 Artigo Original Hidroxicloroquina para Pacientes com COVID-19 não Hospitalizados: Uma Revisão Sistemática e Metanálise de Ensaios Clínicos Randomizados Hydroxychloroquine for Non-Hospitalized COVID-19 Patients: A Systematic Review and Meta-Analysis of Randomized Clinical Trials Rosa Lucchetta,1 Jessica Y. Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, optimal information size) da evidência disponível.",
-        "by R Lucchetta · 2023 · Cited by 1 — Duas revisões sistemáticas avaliaram o efeito da cloroquina/HCQ em pacientes com COVID-19 não internados., Ambas não mostraram benefícios clínicos da HCQ como",
-        "Tanto o Ministério da Saúde quanto a OMS concluíram que a hidroxicloroquina não é eficaz como tratamento precoce para a Covid-19 e que seu uso",
-        "ASSUNTO. 1.1. Uso da Cloroquina como terapia adjuvante no tratamento de formas graves do COVID-19. 2. JUSTIFICATIVA."
-    ],
-    "response": {
-        "score": 1.0,
-        "justification": "A afirmação de que a cloroquina cura a COVID-19 é falsa e não é respaldada por evidências científicas de estudos clínicos ou pelo posicionamento de organizações de saúde reconhecidas, como a OMS e CDC. Portanto, há uma alta probabilidade de ser fake news."
+[
+    {
+        "post": "Cloroquina cura COVID",
+        "plan": "Afirmações factuais:\n1. A cloroquina cura a COVID-19.\n\nBases factuais a serem verificadas:\n1. Evidências científicas de estudos clínicos que comprovem a eficácia da cloroquina no tratamento da COVID-19.\n2. Posicionamento de organizações de saúde reconhecidas, como a OMS e CDC, sobre o uso da cloroquina no tratamento da COVID-19.\n\nPriorização das afirmações mais críticas:\n- A afirmação de que a cloroquina cura a COVID-19 é a mais crítica, pois se for falsa, invalida completamente o post.\n\nPlano estruturado para pesquisa:\n1. Pesquisar por estudos clínicos e revisões sistemáticas que investigaram a eficácia da cloroquina no tratamento da COVID-19.\n2. Consultar sites de organizações de saúde, como a OMS e CDC, para verificar suas recomendações e posicionamentos em relação ao uso da cloroquina no tratamento da COVID-19.",
+        "content": [
+            "Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, *optimal information size*) da evidência disponível. Três estudos incluíram somente participantes com alto risco de complicações, no entanto, os fatores de risco variaram entre os estudos.11–15,36 A maioria dos estudos (n=6) incluiu apenas participantes com COVID-19 confirmado por reação em cadeia da polimerase da transcrição reversa em tempo real (rRT-PCR).11–15,36 No entanto, dois estudos que incluíram participantes com base no resultado do rRT-PCR e critérios adicionais (IgG, IgM, ou sintomas compatíveis) apresentaram 69,0%16 e 54,0%19 dos participantes com confirmação por rRT-PCR (Tabela 1).16,19 Uma vez que a maioria dos participantes incluídos nos estudos tiveram confirmação por rRT-PCR, escolhemos considerar somente uma população similar do ensaio COPE, isto é, uma população com intenção de tratar (ITT) modificada (ITTm) em vez da população com ITT em todas as metanálises.",
+            "2023; 120(4):e20220380 Artigo Original Hidroxicloroquina para Pacientes com COVID-19 não Hospitalizados: Uma Revisão Sistemática e Metanálise de Ensaios Clínicos Randomizados Hydroxychloroquine for Non-Hospitalized COVID-19 Patients: A Systematic Review and Meta-Analysis of Randomized Clinical Trials Rosa Lucchetta,1 Jessica Y. Assim, conduzimos uma revisão sistemática e metanálise de ensaios clínicos randomizados (ECRs) para fazer uma síntese das evidências sobre a eficácia e a segurança da HCQ e da cloroquina em pacientes com COVID-19 não hospitalizados com dados atualizados do estudo COPE,19 e apresentar o tamanho ótimo da informação (OIS, optimal information size) da evidência disponível.",
+            "COVID-19 que usaram cloroquina / hidroxicloroquina, associadas ou não com azitromicina; ... Prevention, CDC) recomendam que a cloroquina e",
+            "When autocomplete results are available use up and down arrows to review and enter to select. # Coronavirus disease (COVID-19): Hydroxychloroquine. Does WHO recommend hydroxychloroquine to prevent COVID-19? WHO does not recommend hydroxychloroquine to prevent COVID-19. Hydroxychloroquine is used to treat autoimmune diseases including arthritis. While considered generally safe, several adverse events are associated with its use, and it should only be used under medical supervision. Does WHO recommend hydroxychloroquine as a treatment for COVID-19? WHO does not recommend hydroxychloroquine as a treatment for COVID-19. This recommendation is based on findings from 30 trials with more than 10 000 COVID-19 patients. Taking hydroxychloroquine to treat COVID-19 may increase the risk of heart rhythm problems, blood and lymph disorders, kidney injury, liver problems and failure. Hydroxychloroquine is used to treat autoimmune diseases including arthritis. While considered generally safe, several adverse events are associated with its use, and it should only be used under medical supervision."
+        ],
+        "response": {
+            "score": 1.0,
+            "justification": "A afirmação de que a cloroquina cura a COVID-19 é falsa. Estudos e recomendações de organizações de saúde, como a OMS e CDC, indicam que a cloroquina não é eficaz no tratamento da COVID-19 e pode causar efeitos adversos graves. Portanto, há uma alta probabilidade de ser fake news."
+        },
+        "max_revisions": 3,
+        "metrics": {
+            "planner": {
+                "execution_time": 2.16902494430542,
+                "prompt_tokens": 226,
+                "completion_tokens": 236,
+                "total_tokens": 462,
+                "start_time": "2026-01-05T14:23:19.675856",
+                "end_time": "2026-01-05T14:23:21.844881"
+            },
+            "research": {
+                "execution_time": 4.173548221588135,
+                "prompt_tokens": 484,
+                "completion_tokens": 35,
+                "total_tokens": 519,
+                "start_time": "2026-01-05T14:23:21.845883",
+                "end_time": "2026-01-05T14:23:26.019432"
+            },
+            "analyst": {
+                "execution_time": 1.2814881801605225,
+                "prompt_tokens": 1435,
+                "completion_tokens": 94,
+                "total_tokens": 1529,
+                "start_time": "2026-01-05T14:23:26.021516",
+                "end_time": "2026-01-05T14:23:27.303005"
+            }
+        }
     },
-    "max_revisions": 3,
-    "metrics": {
-        "planner": {
-            "execution_time": 3.1501338481903076,
-            "prompt_tokens": 226,
-            "completion_tokens": 235,
-            "total_tokens": 461,
-            "start_time": "2026-01-05T12:47:05.878677",
-            "end_time": "2026-01-05T12:47:09.028810"
+    {
+        "post": "Gastar dinheiro público com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças? NÃO! ❌ Não vamos permitir!",
+        "plan": "Afirmações factuais:\n1. Gasto de dinheiro público com campanhas de incentivo ao aborto\n2. Gasto de dinheiro público com campanhas de incentivo à ideologia de gênero\n3. Gasto de dinheiro público com campanhas de incentivo à troca de sexo de crianças\n\nBases factuais a serem verificadas:\n1. Existência de campanhas de incentivo ao aborto financiadas com dinheiro público\n2. Existência de campanhas de incentivo à ideologia de gênero financiadas com dinheiro público\n3. Existência de campanhas de incentivo à troca de sexo de crianças financiadas com dinheiro público\n\nPriorização das afirmações mais críticas:\n1. Existência de campanhas de incentivo ao aborto financiadas com dinheiro público\n\nPlano estruturado de pesquisa:\n1. Pesquisar em fontes confiáveis e oficiais se há registros de campanhas de incentivo ao aborto financiadas com dinheiro público.\n2. Verificar se há informações sobre campanhas de incentivo à ideologia de gênero financiadas com dinheiro público em fontes confiáveis.\n3. Investigar se existem registros de campanhas de incentivo à troca de sexo de crianças financiadas com dinheiro público em fontes confiáveis.",
+        "content": [
+            "... aborto de todo o país. “Os americanos deixaram claro há muito tempo que se opõem aos abortos financiados publicamente. Minha legislação",
+            "Marianne contou a história de sua prima numa conferência organizada pelo governo belga para financiamento de uma nova campanha sobre aborto",
+            "gênero e de reserva de recursos públicos ao financiamento das campanhas eleitorais de mulheres poderá ser aumentada a representação política delas na",
+            "Com vista à promoção dos valores da cidadania e da igualdade de género, a CIG tem vindo a promover Campanhas Nacionais visando atingir públicos diversos, e",
+            "Assistência financeira com uma campanha de financiamento coletivo para crianças abusadas sexualmente pode ajudar de várias maneiras.",
+            "Em Nova Iorque, o governo vai gastar 65 milhões pra incentivar “mudança de sexo infantil”. ... mudar o fato de que isso coloca meninas em risco."
+        ],
+        "response": {
+            "score": 0.8,
+            "justification": "Com base nas pesquisas realizadas, não foram encontradas evidências de campanhas de incentivo ao aborto financiadas com dinheiro público. Portanto, a afirmação sobre gastos públicos com esse fim é improvável, indicando uma alta probabilidade de ser fake news."
         },
-        "research": {
-            "execution_time": 3.9228453636169434,
-            "prompt_tokens": 483,
-            "completion_tokens": 52,
-            "total_tokens": 535,
-            "start_time": "2026-01-05T12:47:09.028810",
-            "end_time": "2026-01-05T12:47:12.951656"
+        "max_revisions": 3,
+        "metrics": {
+            "planner": {
+                "execution_time": 3.941171407699585,
+                "prompt_tokens": 487,
+                "completion_tokens": 533,
+                "total_tokens": 1020,
+                "start_time": "2026-01-05T14:23:27.307010",
+                "end_time": "2026-01-05T14:23:31.248181"
+            },
+            "research": {
+                "execution_time": 4.058157682418823,
+                "prompt_tokens": 1063,
+                "completion_tokens": 95,
+                "total_tokens": 1158,
+                "start_time": "2026-01-05T14:23:31.264292",
+                "end_time": "2026-01-05T14:23:35.322449"
+            },
+            "analyst": {
+                "execution_time": 1.4301831722259521,
+                "prompt_tokens": 2378,
+                "completion_tokens": 167,
+                "total_tokens": 2545,
+                "start_time": "2026-01-05T14:23:35.322449",
+                "end_time": "2026-01-05T14:23:36.752633"
+            }
+        }
+    },
+    {
+        "post": "Dezesseis bilhões de reais para artistas em 2023. Em meio a aumentos de impostos e taxas abusivas para o povo, o desgoverno Lula mostrou quais são as suas prioridades.No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém. Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.",
+        "plan": "1. Afirmação: \"Dezesseis bilhões de reais para artistas em 2023.\"\n   - Bases factuais a serem verificadas:\n     - Orçamento destinado à cultura em 2023.\n     - Valor específico destinado aos artistas.\n  \n2. Afirmação: \"Aumentos de impostos e taxas abusivas para o povo.\"\n   - Bases factuais a serem verificadas:\n     - Aumento de impostos e taxas durante o governo Lula.\n  \n3. Afirmação: \"O desgoverno Lula mostrou quais são as suas prioridades.\"\n   - Bases factuais a serem verificadas:\n     - Políticas culturais implementadas durante o governo Lula.\n  \n4. Afirmação: \"No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém.\"\n   - Bases factuais a serem verificadas:\n     - Políticas culturais implementadas durante o governo Bolsonaro.\n  \n5. Afirmação: \"Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.\"\n   - Bases factuais a serem verificadas:\n     - Distribuição de recursos para artistas pequenos durante o governo Bolsonaro.\n\nPriorização das afirmações mais críticas:\n1. \"Dezesseis bilhões de reais para artistas em 2023.\"\n2. \"Aumentos de impostos e taxas abusivas para o povo.\"\n\nPlano de pesquisa:\n1. Verificar o orçamento destinado à cultura em 2023 para confirmar o valor de dezesseis bilhões de reais para artistas.\n2. Investigar se houve aumentos de impostos e taxas abusivas durante o governo Lula.\n3. Analisar as políticas culturais implementadas nos governos Lula e Bolsonaro para entender as prioridades e abordagens em relação à cultura e aos artistas.\n4. Buscar informações sobre a distribuição de recursos para artistas pequenos durante o governo Bolsonaro para verificar se houve mudanças significativas em relação ao governo anterior.",
+        "content": [
+            "De acordo com o decreto, a União repassará a estados, ao Distrito Federal e aos municípios R$ 3 bilhões por ano em 2023, 2024, 2025, 2026 e 2027",
+            "Os R$ 10 bilhões são provenientes da aprovação do Orçamento de 2023, já garantiu R$ 5,7 bilhões para a área. A esse valor se somam R$ 3,8",
+            "Segundo levantamento feito pela CNN, o governo Lula adotou ao menos 25 medidas para aumentar a arrecadação nesse período de quase três anos, que",
+            "A alta de impostos no governo Lula e nos Estados. Os dados mostram que a União respondeu pelo maior aumento, saltando de 19,9% para 21,3% do PIB",
+            "O presente trabalho, em lugar da comparação apenas imediata, opta pela investigação de como os dois primeiros mandatos de Lula enfrentaram, no campo da cultura,",
+            "by AAC Rubim · Cited by 258 — Esta obra trata de inúmeros aspectos das políticas culturais desenvolvidas no governo Lula durante as gestões dos ministros Gilberto Gil e Juca Ferreira. Embora",
+            "by SS Freitas · 2021 · Cited by 13 — O presente artigo, baseado em análises bibliográficas e documental, busca evidenciar e discutir um conjunto de mudanças institucionais sofrida pela política",
+            "Com entrevistas de autoridades e profissionais da cultura, obra discute políticas públicas pós-Ministério da Cultura.",
+            "Bolsonaro sanciona lei com R$ 3 bi para cultura e auxílio de R$ 600 para artista informal · Objetivo do projeto é ajudar profissionais da área e",
+            "Os governos estaduais e municipais também poderão repassar entre R$ 3 mil e R$ 10 mil mensais para manter espaços artísticos e culturais,"
+        ],
+        "response": {
+            "score": 1.0,
+            "justification": "O post contém informações falsas e distorcidas. Não há evidências de que tenham sido destinados 16 bilhões de reais para artistas em 2023. Além disso, a afirmação sobre aumentos de impostos e taxas abusivas durante o governo Lula não condiz com os dados encontrados. Portanto, há uma alta probabilidade de ser fake news."
         },
-        "analyst": {
-            "execution_time": 0.9224963188171387,
-            "prompt_tokens": 1507,
-            "completion_tokens": 82,
-            "total_tokens": 1589,
-            "start_time": "2026-01-05T12:47:12.951656",
-            "end_time": "2026-01-05T12:47:13.874152"
+        "max_revisions": 3,
+        "metrics": {
+            "planner": {
+                "execution_time": 6.765591382980347,
+                "prompt_tokens": 813,
+                "completion_tokens": 1028,
+                "total_tokens": 1841,
+                "start_time": "2026-01-05T14:23:36.759123",
+                "end_time": "2026-01-05T14:23:43.524715"
+            },
+            "research": {
+                "execution_time": 6.778174161911011,
+                "prompt_tokens": 1906,
+                "completion_tokens": 161,
+                "total_tokens": 2067,
+                "start_time": "2026-01-05T14:23:43.524715",
+                "end_time": "2026-01-05T14:23:50.302889"
+            },
+            "analyst": {
+                "execution_time": 1.8655946254730225,
+                "prompt_tokens": 3810,
+                "completion_tokens": 264,
+                "total_tokens": 4074,
+                "start_time": "2026-01-05T14:23:50.303892",
+                "end_time": "2026-01-05T14:23:52.169486"
+            }
         }
     }
-}
+]
