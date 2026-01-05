@@ -5,6 +5,7 @@ from src.models.metrics import NodeMetrics
 
 class AgentState(TypedDict):
     post: str
+    relevant: bool
     plan: str
     content: List[str]
     response: Response
