@@ -18,7 +18,7 @@ def plan_node(state: AgentState, runtime: Runtime[AgentContext]):
 def research_node(state: AgentState, runtime: Runtime[AgentContext]):
     # Chamada LLM para gerar queries
     structured_llm = runtime.context["model"].with_structured_output(Queries)
-    queries = structured_llm.invoke(
+    queries: Queries = structured_llm.invoke(
         [
             SystemMessage(content=RESEARCHER_PROMPT),
             HumanMessage(
