@@ -1,0 +1,53 @@
+from src.nodes.prompts import RESEARCHER_PROMPT, PLAN_PROMPT, ANALYST_PROMPT
+from src.models.state import AgentState
+from src.models.context import AgentContext
+from src.models.models import Queries, Response
+from langchain_core.messages import SystemMessage, HumanMessage
+from langgraph.runtime import Runtime
+
+
+def plan_node(state: AgentState, runtime: Runtime[AgentContext]):
+    messages = [SystemMessage(content=PLAN_PROMPT), HumanMessage(content=state["post"])]
+    response = runtime.context["model"].invoke(messages)
+    return {"plan": response.content}
+
+
+def research_node(state: AgentState, runtime: Runtime[AgentContext]):
+    queries = (
+        runtime.context["model"]
+        .with_structured_output(Queries)
+        .invoke(
+            [
+                SystemMessage(content=RESEARCHER_PROMPT),
+                HumanMessage(
+                    content=f"POST: {state["post"]} \n\n PLAN: {state['plan']}"
+                ),
+            ]
+        )
+    )
+    content = state.get("content", []) or []
+    if isinstance(content, str):
+        content = [content]
+    for q in queries.queries:
+        response = runtime.context["tavily"].search(query=q, max_results=2)
+        for r in response["results"]:
+            content.append(r["content"])
+    return {"content": content} 
+
+
+def analyst_node(state: AgentState, runtime: Runtime[AgentContext]):
+    content = "\n\n".join(state["content"] or [])
+
+    user_message = HumanMessage(
+        content=f"{state['post']}\n\nHere is my plan:\n\n{state['plan']}"
+    )
+
+    messages = [
+        SystemMessage(content=ANALYST_PROMPT.format(content=content)),
+        user_message,
+    ]
+    response = (
+        runtime.context["model"].with_structured_output(Response).invoke(messages)
+    )
+
+    return {"response": response}
