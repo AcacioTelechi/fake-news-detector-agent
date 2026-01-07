@@ -1,14 +1,17 @@
+from pydantic import BaseModel, Field
+from typing import Optional
+from datetime import datetime
+
 from typing import TypedDict, List, Dict, Optional
-from src.models.models import Response
-from src.models.metrics import NodeMetrics
+from src.models.schemas import Response, Metrics
 
 
-class AgentState(TypedDict):
-    post: str
-    relevant: bool
-    plan: str
-    content: List[str]
-    response: Response
-    revision_number: int = 0
-    max_revisions: int = 3
-    metrics: Optional[Dict[str, NodeMetrics]]
+class AgentState(BaseModel):
+    post: str = Field(default="")
+    relevant: bool = Field(default=False)
+    plan: str = Field(default="")
+    content: List[str] = Field(default=[])
+    response: Response = Field(default=Response(score=0.0, justification=""))
+    revision_number: int = Field(default=0)
+    max_revisions: int = Field(default=3)
+    metrics: Optional[Dict[str, Metrics]] = Field(default={})

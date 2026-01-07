@@ -1,6 +1,6 @@
 from langgraph.graph import StateGraph, END
 from src.models import AgentState, AgentContext
-from src.nodes.nodes import entry_node, plan_node, research_node, analyst_node
+from src.models.nodes import entry_node, plan_node, research_node, analyst_node
 
 
 builder = StateGraph(state_schema=AgentState, context_schema=AgentContext)
@@ -13,7 +13,7 @@ builder.add_node("analyst", analyst_node)
 
 builder.set_entry_point("entry")
 builder.add_conditional_edges(
-    "entry", lambda state: state["relevant"], {False: END, True: "planner"}
+    "entry", lambda state: state.relevant, {False: END, True: "planner"}
 )
 
 builder.add_edge("planner", "research")
