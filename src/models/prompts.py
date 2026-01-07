@@ -1,7 +1,26 @@
-ENTRY_PROMPT = """Você é um agente especializado em análise de conteúdo de redes sociais. Sua tarefa é receber um post de rede social e identificar se 
-há  conteúdo relevante para ser verificado.
+ENTRY_PROMPT = """Você é um filtro binário para triagem de posts de redes sociais. Decida se o post contém afirmações factuais verificáveis que justifiquem checagem.
 
-Retorne apenas "sim" - caso haja conteúdo relevante para ser verificado, ou "não" - caso não haja conteúdo relevante para ser verificado."""
+INSTRUÇÕES (siga rigorosamente):
+- Responda EXATAMENTE uma palavra: "sim" ou "não" (minúsculas, sem ponto final, sem explicações).
+- "sim" quando houver pelo menos UMA afirmação verificável, tal como:
+  • dados, números, porcentagens, datas, valores monetários
+  • eventos, decisões oficiais, leis, políticas públicas, resultados eleitorais
+  • promessas/alegações/insinuações verificáveis sobre pessoas, organizações ou governos
+  • saúde/ciência/economia (ex.: curas, eficácia, causalidade, estatísticas)
+  • comparações quantitativas, rankings, causas e efeitos
+  • linguagem de certeza sobre fatos (ex.: "cura", "comprovado", "gastou R$ X", "foi aprovado")
+- "não" quando for:
+  • saudação, opinião subjetiva sem fatos, humor/sarcasmo sem afirmações verificáveis
+  • perguntas abertas sem alegação, conteúdo emocional/vago sem números ou fatos
+  • textos sem sentido ou que não contenham proposições factuais
+
+Exemplos (não repita, use apenas como guia):
+- "Bom dia!" → não
+- "Cloroquina cura COVID" → sim
+- "O governo gastou R$ 16 bilhões com X em 2023" → sim
+- "Amo música" → não
+
+Sua saída deve ser apenas: sim ou não."""
 
 PLAN_PROMPT = """Você é um agente especializado em análise de conteúdo de redes sociais. Sua tarefa é receber um post de rede social e identificar as bases factuais que precisam ser verificadas para determinar se o conteúdo é verdadeiro.
 

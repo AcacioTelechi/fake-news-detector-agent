@@ -2,8 +2,10 @@ import os
 import json
 from dotenv import load_dotenv
 
+from langchain.chat_models import init_chat_model
+
+
 from src.graphs.v1 import graph
-from langchain_openai import ChatOpenAI
 from tavily import TavilyClient
 from src.utils.observability import (
     UsageMetadataCallbackHandler,
@@ -17,7 +19,18 @@ load_dotenv()
 if __name__ == "__main__":
     thread = {"configurable": {"thread_id": "1"}}
 
-    model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    # Get model name from environment variable or use default
+    # model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
+    model_name = os.getenv("MODEL_NAME", "llama3.1:8b")
+    temperature = float(os.getenv("MODEL_TEMPERATURE", "0"))
+
+    model = init_chat_model(
+        model=model_name,
+        model_provider="ollama",
+        base_url="http://localhost:11434",
+        temperature=temperature,
+    )
+
     tavily = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
 
     # Criar callback handler para rastrear tokens
@@ -26,10 +39,10 @@ if __name__ == "__main__":
 
     # Posts
     posts = [
-        "Bom dia!",
-        "Cloroquina cura COVID",
+        # "Bom dia!",
+        # "Cloroquina cura COVID",
         "Gastar dinheiro público com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças? NÃO! ❌ Não vamos permitir!",
-        "Dezesseis bilhões de reais para artistas em 2023. Em meio a aumentos de impostos e taxas abusivas para o povo, o desgoverno Lula mostrou quais são as suas prioridades.No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém. Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.",
+        # "Dezesseis bilhões de reais para artistas em 2023. Em meio a aumentos de impostos e taxas abusivas para o povo, o desgoverno Lula mostrou quais são as suas prioridades.No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém. Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.",
     ]
     # Configurar callback no config do graph
     config = {
