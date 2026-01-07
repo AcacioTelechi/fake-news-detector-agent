@@ -13,7 +13,10 @@ builder.add_node("analyst", analyst_node)
 
 builder.set_entry_point("entry")
 builder.add_conditional_edges(
-    "entry", lambda state: state.relevant, {False: END, True: "planner"}
+    "entry",
+    lambda state: state.relevance_analysis is not None
+    and state.relevance_analysis.relevant,
+    {False: END, True: "planner"},
 )
 
 builder.add_edge("planner", "research")

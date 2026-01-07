@@ -5,6 +5,9 @@ from typing import List, Optional
 class Queries(BaseModel):
     queries: List[str]
 
+class RelevanceAnalysis(BaseModel):
+    relevant: bool
+    reasoning: str
 
 class Response(BaseModel):
     score: float

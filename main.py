@@ -1,3 +1,4 @@
+import datetime
 import os
 import json
 from dotenv import load_dotenv
@@ -22,6 +23,7 @@ if __name__ == "__main__":
     # Get model name from environment variable or use default
     # model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
     model_name = os.getenv("MODEL_NAME", "llama3.1:8b")
+    # model_name = os.getenv("MODEL_NAME", "qwen2.5:1.5b")
     temperature = float(os.getenv("MODEL_TEMPERATURE", "0"))
 
     model = init_chat_model(
@@ -39,10 +41,10 @@ if __name__ == "__main__":
 
     # Posts
     posts = [
-        # "Bom dia!",
-        # "Cloroquina cura COVID",
+        "Bom dia!",
+        "Cloroquina cura COVID",
         "Gastar dinheiro público com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças? NÃO! ❌ Não vamos permitir!",
-        # "Dezesseis bilhões de reais para artistas em 2023. Em meio a aumentos de impostos e taxas abusivas para o povo, o desgoverno Lula mostrou quais são as suas prioridades.No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém. Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.",
+        "Dezesseis bilhões de reais para artistas em 2023. Em meio a aumentos de impostos e taxas abusivas para o povo, o desgoverno Lula mostrou quais são as suas prioridades.No governo Bolsonaro, mostramos que é possível fazer cultura sem precisar comprar ninguém. Demonstramos que o dinheiro pode, sim, chegar à ponta, aos artistas pequenos que, agora, voltaram a ser deixados de lado.",
     ]
     # Configurar callback no config do graph
     config = {
@@ -63,9 +65,23 @@ if __name__ == "__main__":
         print_metrics_summary(resp)
 
         resp["metrics"] = {k: v.model_dump() for k, v in resp["metrics"].items()}
-        if resp["relevant"]:
+        resp["relevance_analysis"] = resp["relevance_analysis"].model_dump()
+        if resp["relevance_analysis"]["relevant"]:
             resp["response"] = resp["response"].model_dump()
         resp_list.append(resp)
 
     with open("resp.json", "w", encoding="utf-8") as f:
         json.dump(resp_list, f, ensure_ascii=False)
+
+    with open("outputs.json", "r", encoding="utf-8") as f:
+        actual_ouputs = json.load(f)
+    
+    for resp in resp_list:
+        resp['model'] = model_name
+        resp['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        resp['temperature'] = temperature
+
+        actual_ouputs.append(resp)
+
+    with open("outputs.json", "w", encoding="utf-8") as f:
+        json.dump(actual_ouputs, f, ensure_ascii=False)

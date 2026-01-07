@@ -6,7 +6,7 @@ from src.models.prompts import (
 )
 from src.models.state import AgentState
 from src.models.context import AgentContext
-from src.models.schemas import Queries, Response
+from src.models.schemas import Queries, RelevanceAnalysis, Response
 from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.runtime import Runtime
 from src.utils.observability import track_node_metrics
@@ -15,11 +15,10 @@ from src.utils.observability import track_node_metrics
 @track_node_metrics("entry")
 def entry_node(state: AgentState, runtime: Runtime[AgentContext]):
     messages = [SystemMessage(content=ENTRY_PROMPT), HumanMessage(content=state.post)]
-    response = runtime.context.model.invoke(messages)
-    return {
-        "relevant": response.content.lower()
-        in ["sim", "s", "yes", "y", "true", "t", "1"]
-    }
+    response = runtime.context.model.with_structured_output(RelevanceAnalysis).invoke(
+        messages
+    )
+    return {"relevance_analysis": response}
 
 
 @track_node_metrics("planner")
@@ -36,19 +35,21 @@ def research_node(state: AgentState, runtime: Runtime[AgentContext]):
     queries: Queries = structured_llm.invoke(
         [
             SystemMessage(content=RESEARCHER_PROMPT),
-            HumanMessage(content=f"POST: {state.post} \n\n PLAN: {state.plan}"),
+            HumanMessage(content=f"PLAN: {state.plan}"),
         ]
     )
 
     content = state.content
     if isinstance(content, str):
         content = [content]
+
+    all_responses = []
     for q in queries.queries:
         response = runtime.context.tavily.search(query=q, max_results=2)
         for r in response["results"]:
             content.append(r["content"])
-
-    return {"content": content}
+        all_responses.append(response)
+    return {"content": content, "references": all_responses}
 
 
 @track_node_metrics("analyst")
