@@ -5,7 +5,7 @@ from src.models.prompts import (
     ANALYST_PROMPT,
 )
 from src.models.state import AgentState
-from src.models.context import AgentContext
+from src.models.context import RuntimeContext
 from src.models.schemas import Queries, RelevanceAnalysis, Response
 from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.runtime import Runtime
@@ -13,26 +13,27 @@ from src.utils.observability import track_node_metrics
 
 
 @track_node_metrics("entry")
-def entry_node(state: AgentState, runtime: Runtime[AgentContext]):
+def entry_node(state: AgentState, runtime: Runtime[RuntimeContext]):
     messages = [SystemMessage(content=ENTRY_PROMPT), HumanMessage(content=state.post)]
-    response = runtime.context.model.with_structured_output(RelevanceAnalysis).invoke(
-        messages
-    )
+    entry_model = runtime.context.models_registry.get_model("entry")
+    response = entry_model.with_structured_output(RelevanceAnalysis).invoke(messages)
     return {"relevance_analysis": response}
 
 
 @track_node_metrics("planner")
-def plan_node(state: AgentState, runtime: Runtime[AgentContext]):
+def plan_node(state: AgentState, runtime: Runtime[RuntimeContext]):
     messages = [SystemMessage(content=PLAN_PROMPT), HumanMessage(content=state.post)]
-    response = runtime.context.model.invoke(messages)
+    planner_model = runtime.context.models_registry.get_model("planner")
+    response = planner_model.invoke(messages)
     return {"plan": response.content}
 
 
-@track_node_metrics("research")
-def research_node(state: AgentState, runtime: Runtime[AgentContext]):
+@track_node_metrics("researcher")
+def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
     # Chamada LLM para gerar queries
-    structured_llm = runtime.context.model.with_structured_output(Queries)
-    queries: Queries = structured_llm.invoke(
+    researcher_model = runtime.context.models_registry.get_model("researcher")
+    queries_model = researcher_model.with_structured_output(Queries)
+    queries: Queries = queries_model.invoke(
         [
             SystemMessage(content=RESEARCHER_PROMPT),
             HumanMessage(content=f"PLAN: {state.plan}"),
@@ -53,7 +54,7 @@ def research_node(state: AgentState, runtime: Runtime[AgentContext]):
 
 
 @track_node_metrics("analyst")
-def analyst_node(state: AgentState, runtime: Runtime[AgentContext]):
+def analyst_node(state: AgentState, runtime: Runtime[RuntimeContext]):
     content = "\n\n".join(state.content or [])
 
     user_message = HumanMessage(
@@ -65,7 +66,8 @@ def analyst_node(state: AgentState, runtime: Runtime[AgentContext]):
         user_message,
     ]
 
-    structured_llm = runtime.context.model.with_structured_output(Response)
+    analyst_model = runtime.context.models_registry.get_model("analyst")
+    structured_llm = analyst_model.with_structured_output(Response)
     response = structured_llm.invoke(messages)
 
     return {"response": response}

@@ -8,7 +8,7 @@ from langchain_core.outputs import LLMResult
 from src.models.schemas import Metrics
 from src.models.state import AgentState
 from langgraph.runtime import Runtime
-from src.models.context import AgentContext
+from src.models.context import RuntimeContext
 
 # Thread-local storage para rastrear qual node está executando
 _thread_local = local()
@@ -65,7 +65,7 @@ class UsageMetadataCallbackHandler(BaseCallbackHandler):
                             "input_tokens": input_tokens,
                             "output_tokens": output_tokens,
                             "total_tokens": total_tokens,
-                            "node": self.current_node,
+                            "node": self.current_node
                         }
                     )
 
@@ -110,6 +110,26 @@ def set_callback_handler(handler: UsageMetadataCallbackHandler):
     _thread_local.callback_handler = handler
 
 
+def get_model_name(runtime: Runtime[RuntimeContext], node_name: str) -> str:
+    """
+    Extrai o nome do modelo base do runtime context para um node específico.
+    
+    Args:
+        runtime: Runtime context contendo o ModelsRegistry
+        node_name: Nome do node (entry, planner, researcher, analyst)
+        
+    Returns:
+        Nome do modelo configurado para o node
+    """
+    if not runtime or not runtime.context or not runtime.context.models_registry:
+        return "unknown"
+    
+    try:
+        return runtime.context.models_registry.get_model_name(node_name)
+    except (ValueError, AttributeError):
+        return "unknown"
+
+
 def track_node_metrics(node_name: str):
     """
     Decorator para rastrear métricas de execução de um nó.
@@ -118,11 +138,11 @@ def track_node_metrics(node_name: str):
     Também loga métricas no console.
     """
 
-    def decorator(func: Callable[[AgentState, Runtime[AgentContext]], Dict[str, Any]]):
+    def decorator(func: Callable[[AgentState, Runtime[RuntimeContext]], Dict[str, Metrics]]):
         @wraps(func)
         def wrapper(
-            state: AgentState, runtime: Runtime[AgentContext]
-        ) -> Dict[str, Any]:
+            state: AgentState, runtime: Runtime[RuntimeContext]
+        ) -> Dict[str, Metrics]:
             # Obter callback handler se disponível
             callback_handler = get_callback_handler()
 
@@ -143,8 +163,12 @@ def track_node_metrics(node_name: str):
             # Inicializar métricas no state se não existir
             metrics = state.metrics
 
-            # Criar métricas base (tempo)
+            # Extrair nome do modelo base
+            base_model_name = get_model_name(runtime, node_name)
+
+            # Criar métricas base (tempo e modelo)
             node_metrics = Metrics(
+                base_model=base_model_name,
                 execution_time=execution_time,
                 start_time=start_datetime,
                 end_time=end_datetime,

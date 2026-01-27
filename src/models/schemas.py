@@ -17,6 +17,7 @@ class Response(BaseModel):
 class Metrics(BaseModel):
     """Métricas de execução de um nó do grafo"""
 
+    base_model: str # nome do modelo base utilizado
     execution_time: float  # em segundos
     prompt_tokens: int = 0
     completion_tokens: int = 0
@@ -33,5 +34,6 @@ class Metrics(BaseModel):
         """Representação string das métricas"""
         return (
             f"Execution time: {self.formatted_time} | "
+            f"Base model: {self.base_model} | "
             f"Tokens: {self.total_tokens} ({self.prompt_tokens} prompt + {self.completion_tokens} completion)"
         )
