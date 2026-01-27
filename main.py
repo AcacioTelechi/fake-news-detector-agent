@@ -3,10 +3,8 @@ import os
 import json
 from dotenv import load_dotenv
 
-from langchain.chat_models import init_chat_model
-
-
 from src.graphs.v1 import graph
+from src.models.context import ModelsRegistry, ModelConfig
 from tavily import TavilyClient
 from src.utils.observability import (
     UsageMetadataCallbackHandler,
@@ -21,17 +19,34 @@ if __name__ == "__main__":
     thread = {"configurable": {"thread_id": "1"}}
 
     # Get model name from environment variable or use default
-    # model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
-    model_name = os.getenv("MODEL_NAME", "llama3.1:8b")
+    model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
+    # model_name = os.getenv("MODEL_NAME", "llama3.1:8b")
     # model_name = os.getenv("MODEL_NAME", "qwen2.5:1.5b")
     temperature = float(os.getenv("MODEL_TEMPERATURE", "0"))
 
-    model = init_chat_model(
-        model=model_name,
-        model_provider="ollama",
-        base_url="http://localhost:11434",
-        temperature=temperature,
+    # Criar registry de modelos - pode usar modelos diferentes para cada node
+    # Opção 1: Usar string (aplica default_temperature a todos)
+    models_registry = ModelsRegistry(
+        entry=model_name,
+        planner=model_name,
+        researcher=model_name,
+        analyst=model_name,
+        default_temperature=temperature,
     )
+    
+    # Opção 2: Usar ModelConfig para configurações específicas por node
+    # models_registry = ModelsRegistry(
+    #     entry=model_name,  # usa default_temperature
+    #     planner=ModelConfig(model="gpt-4", temperature=0.7),
+    #     researcher=ModelConfig(model="gpt-3.5-turbo", temperature=0.0),
+    #     analyst=ModelConfig(
+    #         model="ollama:llama2",
+    #         temperature=0.3,
+    #         model_provider="ollama",
+    #         base_url="http://localhost:11434",
+    #     ),
+    #     default_temperature=temperature,
+    # )
 
     tavily = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
 
@@ -51,7 +66,7 @@ if __name__ == "__main__":
         "configurable": {"thread_id": "1"},
         "callbacks": [callback],
     }
-    runtime_context = {"model": model, "tavily": tavily}
+    runtime_context = {"models_registry": models_registry, "tavily": tavily}
 
     resp_list = []
     for post in posts:
@@ -69,9 +84,6 @@ if __name__ == "__main__":
         if resp["relevance_analysis"]["relevant"]:
             resp["response"] = resp["response"].model_dump()
         resp_list.append(resp)
-
-    with open("resp.json", "w", encoding="utf-8") as f:
-        json.dump(resp_list, f, ensure_ascii=False)
 
     with open("outputs.json", "r", encoding="utf-8") as f:
         actual_ouputs = json.load(f)
