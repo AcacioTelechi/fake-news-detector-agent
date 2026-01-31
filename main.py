@@ -19,7 +19,7 @@ if __name__ == "__main__":
     thread = {"configurable": {"thread_id": "1"}}
 
     # Get model name from environment variable or use default
-    model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
+    # model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
     # model_name = os.getenv("MODEL_NAME", "llama3.1:8b")
     # model_name = os.getenv("MODEL_NAME", "qwen2.5:1.5b")
     temperature = float(os.getenv("MODEL_TEMPERATURE", "0"))
@@ -27,10 +27,10 @@ if __name__ == "__main__":
     # Criar registry de modelos - pode usar modelos diferentes para cada node
     # Opção 1: Usar string (aplica default_temperature a todos)
     models_registry = ModelsRegistry(
-        entry=model_name,
-        planner=model_name,
-        researcher=model_name,
-        analyst=model_name,
+        entry="qwen2.5:1.5b",
+        planner="llama3.1:8b",
+        researcher="llama3.1:8b",
+        analyst="llama3.1:8b",
         default_temperature=temperature,
     )
     
@@ -89,7 +89,6 @@ if __name__ == "__main__":
         actual_ouputs = json.load(f)
     
     for resp in resp_list:
-        resp['model'] = model_name
         resp['timestamp'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         resp['temperature'] = temperature
 

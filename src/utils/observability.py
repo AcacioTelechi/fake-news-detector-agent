@@ -184,8 +184,8 @@ def track_node_metrics(node_name: str):
             # Armazenar métricas
             metrics[node_name] = node_metrics
 
-            # Log no console
-            print(f"[{node_name}] {node_metrics}")
+            # # Log no console
+            # print(f"[{node_name}] {node_metrics}")
 
             # Adicionar métricas ao resultado
             result["metrics"] = metrics

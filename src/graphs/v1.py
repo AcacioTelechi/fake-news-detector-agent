@@ -1,9 +1,9 @@
 from langgraph.graph import StateGraph, END
-from src.models import AgentState, AgentContext
+from src.models import AgentState, RuntimeContext
 from src.models.nodes import entry_node, plan_node, research_node, analyst_node
 
 
-builder = StateGraph(state_schema=AgentState, context_schema=AgentContext)
+builder = StateGraph(state_schema=AgentState, context_schema=RuntimeContext)
 
 
 builder.add_node("entry", entry_node)
