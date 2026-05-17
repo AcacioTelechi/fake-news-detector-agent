@@ -19,7 +19,7 @@ DEFAULT_OLLAMA_CONFIG = {
     "base_url": os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
 }
 DEFAULT_MODELS_CONFIG = {
-    "entry": "qwen2.5:1.5b",
+    "entry": "qwen2.5:14b",  # triagem: modelo forte (era 1.5b, permissivo demais)
     "planner": "llama3.1:8b",
     "researcher": "llama3.1:8b",
     "analyst": "llama3.1:8b",

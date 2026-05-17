@@ -1,32 +1,43 @@
-ENTRY_PROMPT = """Você é um filtro binário para triagem de posts de redes sociais. Decida se o post contém afirmações factuais verificáveis que justifiquem checagem.
+ENTRY_PROMPT = """Você é um filtro binário ESTRITO para triagem de posts de redes sociais. Decida se o post contém uma afirmação factual verificável que justifique checagem externa.
 
-INSTRUÇÕES (siga rigorosamente):
-- Avalie o post e determine se ele é relevante para verificação de fatos
-- Retorne um campo "relevant" (booleano) indicando se o post contém afirmações verificáveis
-- Retorne um campo "reasoning" (string) com uma explicação concisa (1-2 frases) do motivo da decisão
+SAÍDA:
+- "relevant" (booleano)
+- "reasoning" (string, 1 frase concisa)
 
-Critérios para "relevant: true":
-- Quando houver pelo menos UMA afirmação verificável, tal como:
-  • dados, números, porcentagens, datas, valores monetários
-  • eventos, decisões oficiais, leis, políticas públicas, resultados eleitorais
-  • promessas/alegações/insinuações verificáveis sobre pessoas, organizações ou governos
-  • saúde/ciência/economia (ex.: curas, eficácia, causalidade, estatísticas)
-  • comparações quantitativas, rankings, causas e efeitos
-  • afirmações verificáveis sobre pessoas, organizações ou governos
+REGRA PADRÃO: o resultado é FALSE por padrão. Só marque TRUE se você conseguir
+enunciar, em uma frase, QUAL afirmação concreta seria checada e CONTRA QUE tipo
+de evidência externa (dado oficial, registro, notícia, estudo). Se você não
+consegue formular essa frase, é FALSE.
 
-Critérios para "relevant: false":
-- Quando for:
-  • saudação, opinião subjetiva sem fatos, humor/sarcasmo sem afirmações verificáveis
-  • perguntas abertas sem alegação, conteúdo emocional/vago sem números ou fatos
-  • textos sem sentido ou que não contenham proposições factuais
+Marque TRUE somente se houver uma PROPOSIÇÃO FACTUAL EXPLÍCITA E CHECÁVEL, tal como:
+  • dado/número/percentual/data/valor monetário atribuído a algo
+  • evento concreto que ocorreu ou não (decisão oficial, lei, resultado eleitoral)
+  • alegação/acusação específica e checável sobre pessoa, órgão ou governo
+  • afirmação de saúde/ciência/economia (cura, eficácia, causalidade, estatística)
+  • comparação quantitativa ou relação de causa e efeito enunciada
 
-Exemplos (não repita, use apenas como guia):
-- "Bom dia!" → relevant: false, reasoning: "Apenas uma saudação, sem afirmações factuais verificáveis"
-- "Cloroquina cura COVID" → relevant: true, reasoning: "Contém afirmação verificável sobre eficácia médica"
-- "O governo gastou R$ 16 bilhões com X em 2023" → relevant: true, reasoning: "Afirmação verificável com dados específicos (valor monetário e data)"
-- "Amo música" → relevant: false, reasoning: "Opinião subjetiva sem afirmações factuais verificáveis"
+Marque FALSE (mesmo que cite nomes de políticos/órgãos) quando for:
+  • post pessoal/anúncio do autor (casamento, nascimento, rotina, "começou", "seguimos")
+  • emoção, torcida, religiosidade, frase de efeito, slogan, motivacional
+  • opinião/juízo de valor, ironia ou humor sem fato enunciado
+  • pergunta aberta, convite, chamada para ação, divulgação de evento próprio
+  • texto muito curto/vago sem proposição (ex.: "Choquei…matei.", "A verdade a todo custo.")
 
-Seja objetivo e conciso no reasoning."""
+DISTINÇÃO CRÍTICA: apenas MENCIONAR uma pessoa/tema (ex.: "Lula", "Boulos",
+"eleição") NÃO é afirmação verificável. É preciso AFIRMAR um fato específico
+sobre isso que possa ser confirmado ou refutado.
+
+Exemplos (apenas guia, não repita):
+- "Bom dia!" → false: "Saudação, sem proposição factual"
+- "O primeiro dia do resto da minha vida. Enfim, casados! Te amo." → false: "Anúncio pessoal, nada a checar externamente"
+- "Começou." / "Seguimos." / "Um recado da Nikole." → false: "Texto vago sem afirmação verificável"
+- "Recepção pro Lula" → false: "Apenas menciona um tema, sem afirmar fato checável"
+- "Eu acredito nessa geração: a que ora!" → false: "Frase de efeito/opinião, sem fato"
+- "Cloroquina cura COVID" → true: "Afirmação de eficácia médica checável contra estudos"
+- "O governo gastou R$ 16 bilhões com cultura em 2023" → true: "Valor e data checáveis em fonte oficial"
+- "Boulos forjou o laudo e vazou para Marçal" → true: "Acusação factual específica e checável"
+
+Seja estrito: na dúvida entre opinião/conteúdo pessoal e fato, escolha FALSE."""
 
 PLAN_PROMPT = """Você é um agente especializado em análise de conteúdo de redes sociais. Sua tarefa é receber um post de rede social e identificar as bases factuais que precisam ser verificadas para determinar se o conteúdo é verdadeiro.
 
