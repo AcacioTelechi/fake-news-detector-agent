@@ -129,6 +129,23 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
 
     safe_queries = _sanitize_queries(generated)
 
+    # Fallback: se o LLM não produziu query usável (ex.: structured output
+    # cuspiu "{ "), pesquisar pelo próprio post; se o post não der query
+    # válida, usar a 1ª linha factual do plano. Evita zerar a pesquisa por
+    # um hiccup de JSON.
+    query_fallback_used = False
+    if not safe_queries:
+        candidates = [state.post or ""]
+        for line in (state.plan or "").splitlines():
+            line = line.strip(" *#-").strip()
+            if len(line) >= 20:
+                candidates.append(line)
+                break
+        fb = _sanitize_queries(candidates)
+        if fb:
+            safe_queries = fb[:1]
+            query_fallback_used = True
+
     all_responses = []
     errors: list[str] = []
     received: list[str] = []
@@ -154,6 +171,7 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
         "generated_queries": generated,
         "sent_queries": safe_queries,
         "tavily_received_queries": received,
+        "query_fallback_used": query_fallback_used,
     }
 
 

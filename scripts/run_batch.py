@@ -24,10 +24,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+import logging
+
 from dotenv import load_dotenv
 
 from src.utils.dataset import load_posts
 from src.utils.batch import compact_jsonl, run_batches
+from src.utils.logging_setup import setup_logger
 
 DEFAULT_INPUT = "input/2023_Completo_redem_0304.csv"
 
@@ -44,6 +47,8 @@ def main() -> int:
     ap.add_argument("--temperature", type=float,
                     default=float(os.getenv("MODEL_TEMPERATURE", "0")))
     ap.add_argument("--no-resume", action="store_true")
+    ap.add_argument("--log-level", choices=["INFO", "DEBUG"], default="DEBUG",
+                    help="detalhe do arquivo de log (DEBUG = bloco por post)")
     ap.add_argument("--dry-run", action="store_true",
                     help="mostra o plano de lotes sem importar/rodar o grafo")
     args = ap.parse_args()
@@ -52,12 +57,19 @@ def main() -> int:
     out_dir = REPO_ROOT / "output"
     out_dir.mkdir(exist_ok=True)
 
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_path = out_dir / f"batch_{run_id}.log"
+    logger = setup_logger(
+        "batch", str(log_path),
+        file_level=logging.DEBUG if args.log_level == "DEBUG" else logging.INFO,
+    )
+    logger.info(f"Log de debug: {log_path}")
+
     posts = load_posts(args.input)
-    print(f"Entrada: {args.input} ({len(posts):,} posts únicos, "
-          f"ordenados por engajamento desc)")
+    logger.info(f"Entrada: {args.input} ({len(posts):,} posts únicos, "
+                f"ordenados por engajamento desc)")
 
     # Resume idempotente: reusa o JSONL mais recente e o compacta
-    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_jsonl = str(out_dir / f"batch_results_{run_id}.jsonl")
     processed = set()
     if not args.no_resume:
@@ -65,27 +77,28 @@ def main() -> int:
         if prev:
             out_jsonl = str(prev[-1])
             processed = compact_jsonl(out_jsonl)
-            print(f"Resume: {len(processed):,} já processados em "
-                  f"{out_jsonl} (JSONL compactado)")
+            logger.info(f"Resume: {len(processed):,} já processados em "
+                        f"{out_jsonl} (JSONL compactado)")
 
     todo = [p for p in posts if p.id not in processed]
     if args.limit is not None:
         todo = todo[: args.limit]
     if not todo:
-        print("Nada a processar.")
+        logger.info("Nada a processar.")
         return 0
 
     n_batches = (len(todo) + args.batch_size - 1) // args.batch_size
-    print(f"A processar: {len(todo):,} posts em {n_batches} lote(s) de "
-          f"{args.batch_size} | {args.workers} workers")
-    print(f"Saída: {out_jsonl}")
-    print(f"Para por cota após {args.quota_error_limit} erros de Tavily.")
+    logger.info(f"A processar: {len(todo):,} posts em {n_batches} lote(s) de "
+                f"{args.batch_size} | {args.workers} workers")
+    logger.info(f"Saída: {out_jsonl}")
+    logger.info(f"Para por cota após {args.quota_error_limit} erros de Tavily.")
 
     if args.dry_run:
         for b in range(n_batches):
             chunk = todo[b * args.batch_size:(b + 1) * args.batch_size]
-            print(f"  Lote {b + 1}/{n_batches}: {len(chunk)} posts "
-                  f"(top eng. {chunk[0].engagement:,} … {chunk[-1].engagement:,})")
+            logger.info(f"  Lote {b + 1}/{n_batches}: {len(chunk)} posts "
+                        f"(top eng. {chunk[0].engagement:,} … "
+                        f"{chunk[-1].engagement:,})")
         return 0
 
     from src.graphs.v1 import graph
@@ -100,28 +113,33 @@ def main() -> int:
         workers=args.workers,
         quota_error_limit=args.quota_error_limit,
         temperature=args.temperature,
+        log=logger.info,
+        debug=logger.debug,
     )
 
-    print("\n" + "=" * 60)
-    print(f"FIM. Processados nesta execução: {summary['processed']:,} "
-          f"em {summary['duration_s']/60:.1f} min")
-    print(f"  erros (success=False): {summary['errored']} | "
-          f"relevantes: {summary['relevant']} | "
-          f"inconclusivos: {summary['inconclusive']} | "
-          f"erros de cota: {summary['quota_errors']}")
-    print(f"  total acumulado (OK): {len(processed) + summary['processed'] - summary['errored']:,}")
-    print(f"  JSONL: {summary['out_jsonl']}")
+    logger.info("\n" + "=" * 60)
+    logger.info(f"FIM. Processados nesta execução: {summary['processed']:,} "
+                f"em {summary['duration_s']/60:.1f} min")
+    logger.info(f"  erros (success=False): {summary['errored']} | "
+                f"relevantes: {summary['relevant']} | "
+                f"inconclusivos: {summary['inconclusive']} | "
+                f"erros de cota: {summary['quota_errors']}")
+    logger.info(f"  total acumulado (OK): "
+                f"{len(processed) + summary['processed'] - summary['errored']:,}")
+    logger.info(f"  JSONL: {summary['out_jsonl']}")
+    logger.info(f"  LOG:   {log_path}")
     if summary["errored"] == summary["processed"] and summary["processed"] > 0:
-        print("  [!] TODOS falharam — verifique Ollama/modelos "
-              "(ollama pull qwen2.5:1.5b llama3.1:8b) ou as chaves do .env. "
-              "Os ids com erro serão reprocessados no próximo run (resume).")
+        logger.info("  [!] TODOS falharam — verifique Ollama/modelos "
+                    "(ollama pull qwen2.5:14b llama3.1:8b) ou as chaves do "
+                    ".env. Veja o tracebacks no LOG. Os ids com erro serão "
+                    "reprocessados no próximo run (resume).")
     elif summary["errored"]:
-        print(f"  [!] {summary['errored']} com erro de infra serão "
-              "reprocessados no próximo run (resume).")
+        logger.info(f"  [!] {summary['errored']} com erro de infra serão "
+                    "reprocessados no próximo run (resume). Detalhe no LOG.")
     if summary["stopped_by_quota"]:
-        print("  Parada por estouro de cota do Tavily — "
-              "rode de novo (resume) após renovar a cota.")
-    print("=" * 60)
+        logger.info("  Parada por estouro de cota do Tavily — "
+                    "rode de novo (resume) após renovar a cota.")
+    logger.info("=" * 60)
     return 0
 
 

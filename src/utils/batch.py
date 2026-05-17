@@ -7,6 +7,7 @@ Independente de CLI. A camada de linha de comando vive em
 import json
 import os
 import threading
+import traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import Callable, List
@@ -21,8 +22,8 @@ DEFAULT_OLLAMA_CONFIG = {
 DEFAULT_MODELS_CONFIG = {
     "entry": "qwen2.5:14b",  # triagem: modelo forte (era 1.5b, permissivo demais)
     "planner": "llama3.1:8b",
-    "researcher": "llama3.1:8b",
-    "analyst": "llama3.1:8b",
+    "researcher": "qwen2.5:14b",  # JSON confiável (llama3.1:8b cuspia "{ ")
+    "analyst": "qwen2.5:14b",  # JSON confiável + menos alucinação
 }
 
 # Marcadores de erro do Tavily que indicam cota esgotada (não falha transitória).
@@ -127,7 +128,9 @@ def analyze_post(
     except Exception as e:
         return {
             "id_mention": post_id, "full_text": post_text, "success": False,
-            "error": f"{type(e).__name__}: {e}", "timestamp": start.isoformat(),
+            "error": f"{type(e).__name__}: {e}",
+            "_traceback": traceback.format_exc(),  # só p/ log, removido do JSONL
+            "timestamp": start.isoformat(),
             "processing_time_s": (datetime.now() - start).total_seconds(),
             "models_config": models_config, "relevant": None,
             "relevance_reasoning": None, "plan": None, "score": None,
@@ -170,8 +173,49 @@ def analyze_post(
         "generated_queries": resp.get("generated_queries") or [],
         "sent_queries": resp.get("sent_queries") or [],
         "tavily_received_queries": resp.get("tavily_received_queries") or [],
+        "query_fallback_used": bool(resp.get("query_fallback_used")),
         "metrics": metrics,
     }
+
+
+def _truncate(v, n: int = 200) -> str:
+    s = str(v).replace("\n", " ")
+    return s if len(s) <= n else s[:n] + "…"
+
+
+def _debug_block(rec: dict) -> str:
+    """Bloco legível por post para o log de debug."""
+    m = rec.get("metrics") or {}
+    timings = " ".join(
+        f"{k}={(m[k] or {}).get('execution_time', 0):.1f}s"
+        for k in ("entry", "planner", "researcher", "analyst", "inconclusive")
+        if k in m
+    )
+    lines = [
+        f"--- {rec.get('id_mention')} | success={rec.get('success')} "
+        f"relevant={rec.get('relevant')} inconclusive={rec.get('inconclusive')} "
+        f"research_failed={rec.get('research_failed')} "
+        f"fallback={rec.get('query_fallback_used')}",
+        f"    text: {_truncate(rec.get('full_text'), 140)}",
+    ]
+    if rec.get("relevance_reasoning"):
+        lines.append(f"    entry: {_truncate(rec.get('relevance_reasoning'), 160)}")
+    if rec.get("plan"):
+        lines.append(f"    plan: {_truncate(rec.get('plan'), 160)}")
+    if rec.get("relevant"):
+        lines.append(f"    generated_queries: {rec.get('generated_queries')}")
+        lines.append(f"    sent_queries: {rec.get('sent_queries')}")
+        lines.append(f"    tavily_received: {rec.get('tavily_received_queries')}")
+    if rec.get("research_errors"):
+        lines.append(f"    research_errors: {rec.get('research_errors')}")
+    if rec.get("score") is not None:
+        lines.append(f"    score={rec.get('score')} "
+                     f"just: {_truncate(rec.get('justification'), 200)}")
+    if rec.get("error"):
+        lines.append(f"    ERROR: {rec.get('error')}")
+    if timings:
+        lines.append(f"    timings: {timings}")
+    return "\n".join(lines)
 
 
 def run_batches(
@@ -188,6 +232,7 @@ def run_batches(
     ollama_config: dict = None,
     temperature: float = 0.0,
     log: Callable[[str], None] = print,
+    debug: Callable[[str], None] = lambda _m: None,
 ) -> dict:
     """Processa `posts` (já ordenados) em lotes, com parada por cota.
 
@@ -200,9 +245,11 @@ def run_batches(
     quota_errors = done = relevant_n = inconclusive_n = errored_n = 0
 
     def _write(rec):
+        # chaves com "_" são internas (ex.: _traceback): vão pro log, não pro JSONL
+        clean = {k: v for k, v in rec.items() if not k.startswith("_")}
         with write_lock:
             with open(out_jsonl, "a", encoding="utf-8") as f:
-                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                f.write(json.dumps(clean, ensure_ascii=False) + "\n")
 
     start_ts = datetime.now()
     for b in range(n_batches):
@@ -234,6 +281,9 @@ def run_batches(
                         "research_errors": [],
                     }
                 _write(rec)
+                debug(_debug_block(rec))
+                if rec.get("_traceback"):
+                    debug(rec["_traceback"])
                 done += 1
                 if not rec.get("success"):
                     errored_n += 1
