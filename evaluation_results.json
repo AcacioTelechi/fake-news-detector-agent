@@ -1,0 +1,1079 @@
+{
+  "timestamp": "2026-01-27T16:23:28.598209",
+  "baseline_model": "gpt-4",
+  "test_models": [
+    "llama3.1:8b",
+    "qwen2.5:1.5b"
+  ],
+  "test_posts": [
+    {
+      "id": "irrelevant_1",
+      "text": "Bom dia!",
+      "expected_relevant": false
+    },
+    {
+      "id": "fake_news_1",
+      "text": "Cloroquina cura COVID",
+      "expected_relevant": true
+    },
+    {
+      "id": "political_1",
+      "text": "Gastar dinheiro público com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças? NÃO! Não vamos permitir!",
+      "expected_relevant": true
+    }
+  ],
+  "baseline_results": {
+    "irrelevant_1": {
+      "success": true,
+      "relevance_analysis": {
+        "relevant": false,
+        "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+      },
+      "metrics": {
+        "entry": {
+          "base_model": "gpt-4",
+          "execution_time": 18.826879262924194,
+          "prompt_tokens": 585,
+          "completion_tokens": 30,
+          "total_tokens": 615,
+          "start_time": "2026-01-27T16:05:30.431188",
+          "end_time": "2026-01-27T16:05:49.258067"
+        }
+      }
+    },
+    "fake_news_1": {
+      "success": true,
+      "relevance_analysis": {
+        "relevant": true,
+        "reasoning": "Contém afirmação verificável sobre eficácia médica"
+      },
+      "metrics": {
+        "entry": {
+          "base_model": "gpt-4",
+          "execution_time": 2.408844470977783,
+          "prompt_tokens": 587,
+          "completion_tokens": 28,
+          "total_tokens": 615,
+          "start_time": "2026-01-27T16:05:49.260582",
+          "end_time": "2026-01-27T16:05:51.669426"
+        },
+        "planner": {
+          "base_model": "gpt-4",
+          "execution_time": 11.495559692382812,
+          "prompt_tokens": 226,
+          "completion_tokens": 376,
+          "total_tokens": 602,
+          "start_time": "2026-01-27T16:05:51.670934",
+          "end_time": "2026-01-27T16:06:03.166494"
+        },
+        "researcher": {
+          "base_model": "gpt-4",
+          "execution_time": 16.358004808425903,
+          "prompt_tokens": 612,
+          "completion_tokens": 120,
+          "total_tokens": 732,
+          "start_time": "2026-01-27T16:06:03.171042",
+          "end_time": "2026-01-27T16:06:19.529047"
+        },
+        "analyst": {
+          "base_model": "gpt-4",
+          "execution_time": 4.350440979003906,
+          "prompt_tokens": 1531,
+          "completion_tokens": 147,
+          "total_tokens": 1678,
+          "start_time": "2026-01-27T16:06:19.530048",
+          "end_time": "2026-01-27T16:06:23.880489"
+        }
+      },
+      "plan": "Afirmação factual presente no post: \"Cloroquina cura COVID\"\n\nBases factuais que precisam ser verificadas para validar a afirmação:\n\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19?\n2. A cloroquina é aprovada por organizações de saúde globais (como a Organização Mundial da Saúde) e nacionais (como a FDA nos EUA ou a ANVISA no Brasil) para o tratamento de COVID-19?\n3. Existem relatos de casos em que a cloroquina foi usada com sucesso para tratar COVID-19?\n4. A cloroquina é segura para uso em pacientes com COVID-19, considerando possíveis efeitos colaterais e contraindicações?\n\nAfirmação mais crítica: A afirmação de que a cloroquina cura COVID-19 é a mais crítica, pois, se falsa, invalida completamente o post.\n\nPlano para pesquisas posteriores:\n\n1. Pesquisar em bases de dados científicas, como PubMed, para encontrar estudos sobre o uso da cloroquina no tratamento de COVID-19.\n2. Verificar as diretrizes e declarações oficiais da Organização Mundial da Saúde, FDA, ANVISA e outras organizações de saúde relevantes sobre o uso da cloroquina para COVID-19.\n3. Procurar por relatos de casos em revistas médicas e notícias confiáveis.\n4. Pesquisar informações sobre a segurança da cloroquina, incluindo possíveis efeitos colaterais e contraindicações, em fontes médicas confiáveis.",
+      "response": {
+        "score": 1.0,
+        "justification": "A afirmação de que a cloroquina cura COVID-19 é falsa. As pesquisas indicam que a eficácia da cloroquina no tratamento da COVID-19 é insuficiente e a Organização Mundial da Saúde e a FDA (agência que controla os medicamentos nos EUA) encerraram os estudos com a hidroxicloroquina para tratamento da Covid-19. Além disso, a FDA emitiu alertas sobre sérios problemas cardíacos em pacientes com COVID-19 tratados com hidroxicloroquina ou cloroquina."
+      }
+    },
+    "political_1": {
+      "success": true,
+      "relevance_analysis": {
+        "relevant": true,
+        "reasoning": "O post faz uma afirmação sobre políticas públicas e uso de dinheiro público, que são verificáveis."
+      },
+      "metrics": {
+        "entry": {
+          "base_model": "gpt-4",
+          "execution_time": 2.3901515007019043,
+          "prompt_tokens": 620,
+          "completion_tokens": 36,
+          "total_tokens": 656,
+          "start_time": "2026-01-27T16:06:23.881496",
+          "end_time": "2026-01-27T16:06:26.271647"
+        },
+        "planner": {
+          "base_model": "gpt-4",
+          "execution_time": 14.808779239654541,
+          "prompt_tokens": 259,
+          "completion_tokens": 389,
+          "total_tokens": 648,
+          "start_time": "2026-01-27T16:06:26.272647",
+          "end_time": "2026-01-27T16:06:41.081426"
+        },
+        "researcher": {
+          "base_model": "gpt-4",
+          "execution_time": 7.568268060684204,
+          "prompt_tokens": 625,
+          "completion_tokens": 61,
+          "total_tokens": 686,
+          "start_time": "2026-01-27T16:06:41.082424",
+          "end_time": "2026-01-27T16:06:48.650692"
+        },
+        "analyst": {
+          "base_model": "gpt-4",
+          "execution_time": 5.362668991088867,
+          "prompt_tokens": 1031,
+          "completion_tokens": 122,
+          "total_tokens": 1153,
+          "start_time": "2026-01-27T16:06:48.651703",
+          "end_time": "2026-01-27T16:06:54.014372"
+        }
+      },
+      "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nPlano estruturado para pesquisas posteriores:\n1. Consultar registros oficiais de gastos do governo para verificar se há alguma menção a campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças.\n2. Pesquisar em fontes de notícias confiáveis para ver se há alguma reportagem sobre esses supostos gastos.\n3. Consultar organizações de fiscalização de gastos públicos para verificar se eles têm alguma informação sobre esses supostos gastos.\n4. Se necessário, entrar em contato com representantes do governo para solicitar informações sobre esses supostos gastos.",
+      "response": {
+        "score": 0.9,
+        "justification": "As pesquisas realizadas não encontraram evidências de que o dinheiro público esteja sendo gasto com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças. Além disso, uma notícia confiável indica que o Congresso proibiu o governo de gastar com incentivo ao aborto e 'mudança de sexo'. Portanto, as afirmações do post parecem ser altamente inconsistentes com as informações disponíveis."
+      }
+    }
+  },
+  "test_results": {
+    "llama3.1:8b": {
+      "entry": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 56.6998450756073,
+              "prompt_tokens": 548,
+              "completion_tokens": 33,
+              "total_tokens": 581,
+              "start_time": "2026-01-27T16:06:54.034298",
+              "end_time": "2026-01-27T16:07:50.734143"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 7.444138288497925,
+              "prompt_tokens": 550,
+              "completion_tokens": 27,
+              "total_tokens": 577,
+              "start_time": "2026-01-27T16:07:50.736150",
+              "end_time": "2026-01-27T16:07:58.180288"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 11.727039337158203,
+              "prompt_tokens": 226,
+              "completion_tokens": 387,
+              "total_tokens": 613,
+              "start_time": "2026-01-27T16:07:58.181295",
+              "end_time": "2026-01-27T16:08:09.908334"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 8.280240297317505,
+              "prompt_tokens": 623,
+              "completion_tokens": 98,
+              "total_tokens": 721,
+              "start_time": "2026-01-27T16:08:09.910849",
+              "end_time": "2026-01-27T16:08:18.191089"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 5.577275276184082,
+              "prompt_tokens": 1354,
+              "completion_tokens": 144,
+              "total_tokens": 1498,
+              "start_time": "2026-01-27T16:08:18.192086",
+              "end_time": "2026-01-27T16:08:23.769361"
+            }
+          },
+          "plan": "Afirmação factual presente no post: \"Cloroquina cura COVID\"\n\nBases factuais que precisam ser verificadas para validar a afirmação:\n\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19?\n2. A cloroquina é aprovada por organizações de saúde globais (como a Organização Mundial da Saúde) e nacionais (como a FDA nos EUA ou a ANVISA no Brasil) para o tratamento de COVID-19?\n3. Existem relatos de casos em que a cloroquina foi usada com sucesso para tratar COVID-19?\n4. A cloroquina é segura para uso em pacientes com COVID-19, considerando possíveis efeitos colaterais e contraindicações?\n\nAfirmação mais crítica: A existência de estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19. Se isso for falso, invalidaria o post.\n\nPlano para pesquisas posteriores:\n\n1. Pesquisar em bases de dados científicas (como PubMed, ScienceDirect, etc.) por estudos sobre o uso da cloroquina no tratamento de COVID-19.\n2. Verificar as diretrizes e declarações oficiais da Organização Mundial da Saúde, FDA, ANVISA e outras organizações de saúde relevantes sobre o uso da cloroquina para COVID-19.\n3. Procurar por relatos de casos em revistas médicas e notícias de saúde confiáveis.\n4. Pesquisar informações sobre a segurança da cloroquina, incluindo possíveis efeitos colaterais e contraindicações, em fontes médicas confiáveis.",
+          "response": {
+            "score": 0.7,
+            "justification": "Embora existam estudos que mostram que a cloroquina pode ter algum efeito no tratamento da COVID-19, a afirmação de que 'cura' a doença é enganosa. A FDA e outras organizações de saúde alertaram sobre os riscos potenciais e efeitos colaterais graves do uso da cloroquina. Além disso, a cloroquina não é aprovada como uma cura definitiva para a COVID-19. Portanto, a afirmação é parcialmente falsa e pode levar a interpretações errôneas."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Opinião subjetiva sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 11.741761445999146,
+              "prompt_tokens": 583,
+              "completion_tokens": 29,
+              "total_tokens": 612,
+              "start_time": "2026-01-27T16:08:23.770867",
+              "end_time": "2026-01-27T16:08:35.512629"
+            }
+          }
+        }
+      },
+      "planner": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.8345746994018555,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:08:35.515637",
+              "end_time": "2026-01-27T16:08:37.350212"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.4405348300933838,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:08:37.353526",
+              "end_time": "2026-01-27T16:08:38.794061"
+            },
+            "planner": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 154.78092575073242,
+              "prompt_tokens": 230,
+              "completion_tokens": 584,
+              "total_tokens": 814,
+              "start_time": "2026-01-27T16:08:38.795008",
+              "end_time": "2026-01-27T16:11:13.575933"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 8.415261030197144,
+              "prompt_tokens": 820,
+              "completion_tokens": 65,
+              "total_tokens": 885,
+              "start_time": "2026-01-27T16:11:13.576942",
+              "end_time": "2026-01-27T16:11:21.992204"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 6.582326412200928,
+              "prompt_tokens": 1525,
+              "completion_tokens": 104,
+              "total_tokens": 1629,
+              "start_time": "2026-01-27T16:11:21.993710",
+              "end_time": "2026-01-27T16:11:28.576036"
+            }
+          },
+          "plan": "**Análise de Conteúdo**\n\n**Post:** \"A Cloroquina é o remédio que cura o COVID-19! Meu médico me disse que é seguro e eficaz.\"\n\n**Afirmações Factuais:**\n\n1. A Cloroquina é capaz de curar o COVID-19.\n2. O médico do autor afirmou que a Cloroquina é segura e eficaz para tratar o COVID-19.\n\n**Bases Fácticas a Serem Verificadas:**\n\n1. **Eficácia da Cloroquina no tratamento do COVID-19:**\n * Pesquisas clínicas publicadas em revistas científicas sobre o uso da Cloroquina no tratamento do COVID-19.\n * Resultados de estudos randomizados controlados (ERCs) que avaliem a eficácia da Cloroquina na redução dos sintomas e melhoria da recuperação do paciente com COVID-19.\n2. **Segurança da Cloroquina:**\n * Relatórios de eventos adversos associados ao uso da Cloroquina em pacientes com COVID-19.\n * Estudos que avaliem a toxicidade e o potencial de interações medicamentosas da Cloroquina.\n3. **Declaração do médico:**\n * Verificar se o médico mencionado é especialista em doenças infecciosas ou imunologia.\n * Solicitar declarações oficiais do médico sobre a eficácia e segurança da Cloroquina no tratamento do COVID-19.\n\n**Priorização das Afirmações:**\n\n1. A afirmação de que a Cloroquina é capaz de curar o COVID-19 é a mais crítica, pois se for falsa, invalidaria todo o post.\n2. A declaração do médico também é importante, pois pode influenciar a credibilidade da informação.\n\n**Plano Estruturado para Pesquisas Posteriores:**\n\n1. Buscar estudos científicos publicados em revistas indexadas que avaliem a eficácia e segurança da Cloroquina no tratamento do COVID-19.\n2. Contatar o médico mencionado para solicitar declarações oficiais sobre a eficácia e segurança da Cloroquina.\n3. Verificar se há relatórios de eventos adversos associados ao uso da Cloroquina em pacientes com COVID-19.\n4. Avaliar a credibilidade das fontes citadas no post para determinar se elas são confiáveis.\n\nEssa análise é apenas o início do processo de verificação e pode levar a novas descobertas que afetem as conclusões finais.",
+          "response": {
+            "score": 0.9,
+            "justification": "As pesquisas indicam que a cloroquina e a hidroxicloroquina não mostraram eficácia significativa no tratamento da COVID-19 e podem causar eventos adversos. A OMS também está conduzindo mais pesquisas sobre a cloroquina. Portanto, a afirmação de que a cloroquina cura COVID-19 é altamente provável de ser falsa."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz uma afirmação sobre políticas públicas e gastos governamentais, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.535459280014038,
+              "prompt_tokens": 620,
+              "completion_tokens": 37,
+              "total_tokens": 657,
+              "start_time": "2026-01-27T16:11:28.578020",
+              "end_time": "2026-01-27T16:11:30.113479"
+            },
+            "planner": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 115.56596207618713,
+              "prompt_tokens": 263,
+              "completion_tokens": 457,
+              "total_tokens": 720,
+              "start_time": "2026-01-27T16:11:30.114477",
+              "end_time": "2026-01-27T16:13:25.680439"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 9.643222093582153,
+              "prompt_tokens": 694,
+              "completion_tokens": 92,
+              "total_tokens": 786,
+              "start_time": "2026-01-27T16:13:25.681443",
+              "end_time": "2026-01-27T16:13:35.324665"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 3.7776548862457275,
+              "prompt_tokens": 2260,
+              "completion_tokens": 127,
+              "total_tokens": 2387,
+              "start_time": "2026-01-27T16:13:35.325762",
+              "end_time": "2026-01-27T16:13:39.103417"
+            }
+          },
+          "plan": "**Análise do Conteúdo:**\n\n1. **Afirmações factuais presentes no post:**\n * Campanhas de incentivo ao aborto são financiadas com dinheiro público.\n * Ideologia de gênero é promovida com dinheiro público.\n * Crianças têm suas identidades de gênero trocadas.\n\n2. **Bases factuais que precisam ser verificadas:**\n - Existência e financiamento de campanhas de incentivo ao aborto com dinheiro público.\n - Promoção da ideologia de gênero em programas ou projetos públicos financiados pelo governo.\n - Casos específicos de crianças cujas identidades de gênero foram alteradas, incluindo as razões e procedimentos utilizados.\n\n3. **Priorização das afirmações mais críticas:**\n A prioridade deve ser dada às afirmações que envolvem a promoção da ideologia de gênero em crianças, pois se trata de um tema altamente sensível e controverso, especialmente quando envolve menores.\n\n4. **Plano estruturado para pesquisas posteriores:**\n - **Passo 1:** Pesquisar leis e regulamentações nacionais que tratam sobre o financiamento público de campanhas sociais e políticas.\n - **Passo 2:** Identificar programas ou projetos específicos que promovem a ideologia de gênero e verificar se há evidências de financiamento público.\n - **Passo 3:** Buscar relatórios de órgãos de fiscalização governamental sobre a utilização de fundos públicos em campanhas sociais.\n - **Passo 4:** Pesquisar casos judiciais ou notícias que envolvam mudanças de identidade de gênero em crianças, incluindo as razões e procedimentos utilizados.\n\n**Observações:**\n- É crucial abordar essas questões com objetividade e baseada em evidências.\n- A verificação desses fatos deve ser feita por meio de fontes confiáveis e imparciais.",
+          "response": {
+            "score": 0.9,
+            "justification": "As pesquisas realizadas não encontraram evidências de que dinheiro público seja usado para financiar campanhas de incentivo ao aborto ou para promover a troca de sexo em crianças. Além disso, a promoção da 'ideologia de gênero', conforme mencionado no post, parece ser uma interpretação distorcida de programas que visam à equidade de gênero e raça. Portanto, a postagem parece ser altamente enganosa e provavelmente é fake news."
+          }
+        }
+      },
+      "researcher": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.2648966312408447,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:13:39.109869",
+              "end_time": "2026-01-27T16:13:40.374765"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.3128840923309326,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:13:40.375849",
+              "end_time": "2026-01-27T16:13:41.688733"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 7.83519721031189,
+              "prompt_tokens": 226,
+              "completion_tokens": 291,
+              "total_tokens": 517,
+              "start_time": "2026-01-27T16:13:41.688733",
+              "end_time": "2026-01-27T16:13:49.523930"
+            },
+            "researcher": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 47.027868032455444,
+              "prompt_tokens": 499,
+              "completion_tokens": 99,
+              "total_tokens": 598,
+              "start_time": "2026-01-27T16:13:49.524928",
+              "end_time": "2026-01-27T16:14:36.552796"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 6.27543306350708,
+              "prompt_tokens": 1906,
+              "completion_tokens": 135,
+              "total_tokens": 2041,
+              "start_time": "2026-01-27T16:14:36.553886",
+              "end_time": "2026-01-27T16:14:42.829319"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Cloroquina cura COVID.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID.\n2. Organizações de saúde globais, como a Organização Mundial da Saúde (OMS) e o Centro de Controle e Prevenção de Doenças (CDC), recomendam o uso de cloroquina para o tratamento de COVID.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID.\n\nPlano estruturado e claro que será usado para pesquisas posteriores:\n1. Pesquisar em bases de dados científicas, como PubMed e ScienceDirect, por estudos que investigam a eficácia da cloroquina no tratamento de COVID.\n2. Verificar as diretrizes e recomendações da OMS e do CDC sobre o uso de cloroquina para o tratamento de COVID.\n3. Consultar especialistas em doenças infecciosas e farmacologia para obter suas opiniões sobre a eficácia da cloroquina no tratamento de COVID.",
+          "response": {
+            "score": 1.0,
+            "justification": "As pesquisas e diretrizes de organizações de saúde globais, como a OMS e o CDC, indicam que a cloroquina e a hidroxicloroquina não são recomendadas para o tratamento de COVID-19 fora do contexto de um ensaio clínico. Além disso, a FDA revogou a autorização de uso emergencial desses medicamentos para o tratamento de COVID-19. Portanto, a afirmação de que a cloroquina cura COVID é altamente provável de ser fake news."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz alegações sobre políticas públicas e uso de dinheiro público, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 2.596384048461914,
+              "prompt_tokens": 620,
+              "completion_tokens": 35,
+              "total_tokens": 655,
+              "start_time": "2026-01-27T16:14:42.831686",
+              "end_time": "2026-01-27T16:14:45.428070"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 11.28205680847168,
+              "prompt_tokens": 259,
+              "completion_tokens": 389,
+              "total_tokens": 648,
+              "start_time": "2026-01-27T16:14:45.429070",
+              "end_time": "2026-01-27T16:14:56.711127"
+            },
+            "researcher": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 30.47046184539795,
+              "prompt_tokens": 597,
+              "completion_tokens": 63,
+              "total_tokens": 660,
+              "start_time": "2026-01-27T16:14:56.713071",
+              "end_time": "2026-01-27T16:15:27.183533"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 4.997449636459351,
+              "prompt_tokens": 1058,
+              "completion_tokens": 156,
+              "total_tokens": 1214,
+              "start_time": "2026-01-27T16:15:27.184531",
+              "end_time": "2026-01-27T16:15:32.181980"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nPlano estruturado para pesquisas posteriores:\n1. Consultar registros oficiais de gastos do governo para verificar se há alguma menção a campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças.\n2. Pesquisar em fontes de notícias confiáveis para ver se há alguma reportagem sobre esses supostos gastos.\n3. Consultar organizações de fiscalização de gastos públicos para verificar se eles têm alguma informação sobre esses supostos gastos.\n4. Se necessário, entrar em contato com representantes do governo para solicitar informações sobre esses supostos gastos.",
+          "response": {
+            "score": 0.8,
+            "justification": "As pesquisas realizadas não forneceram evidências claras de que dinheiro público está sendo gasto com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças, como afirmado no post. Embora haja registros de gastos com campanhas relacionadas a questões de gênero e aborto, não há indicação de que essas campanhas incentivem tais práticas, mas sim que promovam discussões e conscientização. Além disso, a afirmação sobre a troca de sexo de crianças não foi corroborada por nenhuma fonte confiável."
+          }
+        }
+      },
+      "analyst": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.2329797744750977,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:15:32.188988",
+              "end_time": "2026-01-27T16:15:33.421968"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.6727063655853271,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:15:33.423983",
+              "end_time": "2026-01-27T16:15:35.096689"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 10.560441732406616,
+              "prompt_tokens": 226,
+              "completion_tokens": 395,
+              "total_tokens": 621,
+              "start_time": "2026-01-27T16:15:35.100203",
+              "end_time": "2026-01-27T16:15:45.660645"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 8.92106318473816,
+              "prompt_tokens": 631,
+              "completion_tokens": 73,
+              "total_tokens": 704,
+              "start_time": "2026-01-27T16:15:45.661655",
+              "end_time": "2026-01-27T16:15:54.582718"
+            },
+            "analyst": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 66.80106687545776,
+              "prompt_tokens": 1747,
+              "completion_tokens": 107,
+              "total_tokens": 1854,
+              "start_time": "2026-01-27T16:15:54.583714",
+              "end_time": "2026-01-27T16:17:01.384781"
+            }
+          },
+          "plan": "Afirmação factual presente no post: \"Cloroquina cura COVID\"\n\nBases factuais que precisam ser verificadas para validar a afirmação:\n\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19?\n2. A cloroquina é aprovada por organizações de saúde globais (como a Organização Mundial da Saúde) e nacionais (como a FDA nos EUA ou a ANVISA no Brasil) para o tratamento de COVID-19?\n3. Existem relatos de casos em que a cloroquina foi usada com sucesso para tratar COVID-19?\n4. A cloroquina é recomendada por profissionais de saúde para o tratamento de COVID-19?\n\nAfirmação mais crítica: A existência de estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19. Se isso for falso, invalidaria o post.\n\nPlano estruturado para pesquisas posteriores:\n\n1. Pesquisar em bases de dados científicas (como PubMed, ScienceDirect, etc.) por estudos sobre a eficácia da cloroquina no tratamento de COVID-19.\n2. Verificar as diretrizes e declarações oficiais da Organização Mundial da Saúde, FDA, ANVISA e outras organizações de saúde relevantes sobre o uso da cloroquina para COVID-19.\n3. Procurar por relatos de casos em revistas médicas e notícias de saúde confiáveis sobre o uso da cloroquina no tratamento de COVID-19.\n4. Consultar especialistas em doenças infecciosas e farmacologia sobre a eficácia e segurança da cloroquina no tratamento de COVID-19.",
+          "response": {
+            "score": 1.0,
+            "justification": "A afirmação 'Cloroquina cura COVID' é baseada em estudos científicos que não comprovam a eficácia da cloroquina no tratamento de COVID-19. Além disso, organizações de saúde globais e nacionais, como a OMS e a FDA, não aprovaram o uso da cloroquina para o tratamento de COVID-19."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz uma afirmação sobre políticas públicas e uso de dinheiro público, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.5143020153045654,
+              "prompt_tokens": 620,
+              "completion_tokens": 36,
+              "total_tokens": 656,
+              "start_time": "2026-01-27T16:17:01.385780",
+              "end_time": "2026-01-27T16:17:02.900082"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 13.256499528884888,
+              "prompt_tokens": 259,
+              "completion_tokens": 439,
+              "total_tokens": 698,
+              "start_time": "2026-01-27T16:17:02.900704",
+              "end_time": "2026-01-27T16:17:16.157203"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 4.7975029945373535,
+              "prompt_tokens": 675,
+              "completion_tokens": 61,
+              "total_tokens": 736,
+              "start_time": "2026-01-27T16:17:16.158202",
+              "end_time": "2026-01-27T16:17:20.955705"
+            },
+            "analyst": {
+              "base_model": "llama3.1:8b",
+              "execution_time": 45.84383511543274,
+              "prompt_tokens": 1049,
+              "completion_tokens": 113,
+              "total_tokens": 1162,
+              "start_time": "2026-01-27T16:17:20.956706",
+              "end_time": "2026-01-27T16:18:06.800542"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nPlano estruturado para pesquisas posteriores:\n1. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo ao aborto.\n2. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo à ideologia de gênero.\n3. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo à troca de sexo de crianças.\n4. Verificar a legislação local e nacional sobre aborto, ideologia de gênero e troca de sexo em crianças para entender se tais campanhas seriam legais.\n5. Consultar especialistas em políticas públicas e direito para entender melhor o contexto e a legalidade desses supostos gastos.",
+          "response": {
+            "score": 0.9,
+            "justification": "As afirmações do post são baseadas em informações falsas ou distorcidas. Não há evidências de que dinheiro público esteja sendo gasto com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças. A legislação local e nacional proíbe esses tipos de gastos e as informações encontradas nas pesquisas não apoiam as afirmações do post."
+          }
+        }
+      }
+    },
+    "qwen2.5:1.5b": {
+      "entry": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 13.586107730865479,
+              "prompt_tokens": 546,
+              "completion_tokens": 31,
+              "total_tokens": 577,
+              "start_time": "2026-01-27T16:18:06.803551",
+              "end_time": "2026-01-27T16:18:20.389658"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém uma afirmação verificável sobre a eficácia da cloroquina em tratamento de COVID-19."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 1.1669249534606934,
+              "prompt_tokens": 548,
+              "completion_tokens": 43,
+              "total_tokens": 591,
+              "start_time": "2026-01-27T16:18:20.393205",
+              "end_time": "2026-01-27T16:18:21.560129"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 11.94596004486084,
+              "prompt_tokens": 226,
+              "completion_tokens": 309,
+              "total_tokens": 535,
+              "start_time": "2026-01-27T16:18:21.561135",
+              "end_time": "2026-01-27T16:18:33.507095"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 7.782166004180908,
+              "prompt_tokens": 545,
+              "completion_tokens": 73,
+              "total_tokens": 618,
+              "start_time": "2026-01-27T16:18:33.508094",
+              "end_time": "2026-01-27T16:18:41.290260"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 5.695910215377808,
+              "prompt_tokens": 1220,
+              "completion_tokens": 126,
+              "total_tokens": 1346,
+              "start_time": "2026-01-27T16:18:41.293564",
+              "end_time": "2026-01-27T16:18:46.989474"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Cloroquina cura COVID.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID.\n2. Organizações de saúde globais, como a Organização Mundial da Saúde (OMS) e o Centro de Controle e Prevenção de Doenças (CDC), endossam o uso da cloroquina como cura para COVID.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID.\n\nPlano estruturado para pesquisas posteriores:\n1. Pesquisar em bases de dados científicas, como PubMed e ScienceDirect, por estudos que investigam a eficácia da cloroquina no tratamento da COVID.\n2. Verificar as diretrizes e declarações oficiais da OMS e do CDC sobre o uso da cloroquina no tratamento da COVID.\n3. Consultar especialistas em doenças infecciosas e farmacologia para obter opiniões profissionais sobre o assunto.\n4. Verificar se há consenso na comunidade científica sobre a eficácia da cloroquina no tratamento da COVID.",
+          "response": {
+            "score": 0.9,
+            "justification": "As pesquisas indicam que as evidências sobre os benefícios do uso de cloroquina ou hidroxicloroquina são insuficientes contra a COVID-19. Além disso, alertas foram emitidos sobre os efeitos colaterais desses medicamentos. Embora alguns estudos sugiram um possível benefício, não há consenso na comunidade científica. Portanto, a afirmação de que a cloroquina cura COVID é altamente provável de ser fake news."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre políticas públicas e gastos com dinheiro público"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 3.1432812213897705,
+              "prompt_tokens": 580,
+              "completion_tokens": 35,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:18:46.990484",
+              "end_time": "2026-01-27T16:18:50.133765"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 9.169907331466675,
+              "prompt_tokens": 259,
+              "completion_tokens": 382,
+              "total_tokens": 641,
+              "start_time": "2026-01-27T16:18:50.136154",
+              "end_time": "2026-01-27T16:18:59.306061"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 5.074645042419434,
+              "prompt_tokens": 618,
+              "completion_tokens": 61,
+              "total_tokens": 679,
+              "start_time": "2026-01-27T16:18:59.308080",
+              "end_time": "2026-01-27T16:19:04.382725"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 3.1496710777282715,
+              "prompt_tokens": 1024,
+              "completion_tokens": 101,
+              "total_tokens": 1125,
+              "start_time": "2026-01-27T16:19:04.383663",
+              "end_time": "2026-01-27T16:19:07.533334"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nPlano estruturado para pesquisas posteriores:\n1. Consultar registros oficiais de gastos do governo para verificar se há alguma menção a campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças.\n2. Pesquisar em fontes de notícias confiáveis para ver se há alguma reportagem sobre esses supostos gastos.\n3. Consultar organizações de verificação de fatos para ver se elas já investigaram essas afirmações.\n4. Se necessário, entrar em contato com representantes do governo para obter esclarecimentos sobre os gastos.",
+          "response": {
+            "score": 0.9,
+            "justification": "As pesquisas realizadas não encontraram evidências de que o dinheiro público esteja sendo usado para incentivar o aborto ou a troca de sexo de crianças. Além disso, o Congresso proibiu o governo de gastar com incentivo ao aborto e 'mudança de sexo'. Portanto, as afirmações do post são altamente prováveis de serem fake news."
+          }
+        }
+      },
+      "planner": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.8961708545684814,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:19:07.540251",
+              "end_time": "2026-01-27T16:19:09.436422"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.3099429607391357,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:19:09.437510",
+              "end_time": "2026-01-27T16:19:10.747453"
+            },
+            "planner": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 30.175081968307495,
+              "prompt_tokens": 224,
+              "completion_tokens": 1128,
+              "total_tokens": 1352,
+              "start_time": "2026-01-27T16:19:10.750969",
+              "end_time": "2026-01-27T16:19:40.926051"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 15.438847780227661,
+              "prompt_tokens": 1366,
+              "completion_tokens": 59,
+              "total_tokens": 1425,
+              "start_time": "2026-01-27T16:19:40.927069",
+              "end_time": "2026-01-27T16:19:56.365917"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 5.191636323928833,
+              "prompt_tokens": 1681,
+              "completion_tokens": 105,
+              "total_tokens": 1786,
+              "start_time": "2026-01-27T16:19:56.366919",
+              "end_time": "2026-01-27T16:20:01.558556"
+            }
+          },
+          "plan": "1. **Afirmação Factual**: \"Cloroquina cura COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n2. **Afirmação Factual**: \"Cloroquina é a solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n3. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n4. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n5. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n6. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n7. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n8. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n9. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n   - **Bases Factualas Verificáveis**:\n     - Data: Não especificada.\n     - Número de pessoas: Não especificado.\n     - Evento: Não especificado.\n     - Pessoas: Não especificadas.\n     - Organizações: Não especificadas.\n\n10. **Afirmação Factual**: \"Cloroquina é a única solução para o COVID-19\"\n    - **Bases Factualas Verificáveis**:\n      - Data: Não especificada.\n      - Número de pessoas: Não especificado.\n      - Evento: Não especificado.\n      - Pessoas: Não especificadas.\n      - Organizações: Não especificadas.\n\nPlano Estruturado para Pesquisas Posterior:\n\n1. **Identificação da Fonte**: Verificar a origem do post e as fontes mencionadas.\n2. **Pesquisa em Livros, Revistas e Sites Oficiais de Saúde**: Consultar os principais livros sobre o tema, revistas científicas e sites oficiais das agências reguladoras de saúde (como CDC, FDA).\n3. **Pesquisa na Internet**: Verificar se existem pesquisas científicas publicadas em periódicos acadêmicos que avaliam a eficácia da cloroquina para o tratamento do COVID-19.\n4. **Consultar Profissionais de Saúde**: Falar com médicos e especialistas em saúde pública para obter informações confiáveis sobre a eficácia da cloroquina no tratamento do COVID-19.\n5. **Verificação de Testemunhos**: Pesquisar se existem testemunhos ou relatos de pessoas que afirmaram ter melhorado com o uso da cloroquina, mas não foram capazes de encontrar evidências científicas para confirmar essas afirmações.\n\nEste plano visa garantir que todas as bases factuais mencionadas no post sejam verificadas e que a informação seja baseada em fatores verificáveis.",
+          "response": {
+            "score": 0.9,
+            "justification": "A afirmação de que a cloroquina cura COVID-19 é altamente provável de ser fake news. As pesquisas indicam que não há consenso na comunidade médica sobre a eficácia da cloroquina no tratamento da COVID-19. Além disso, a afirmação não fornece detalhes sobre a fonte da informação, o que diminui sua credibilidade."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz alegações sobre políticas públicas e uso de dinheiro público, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.9980247020721436,
+              "prompt_tokens": 620,
+              "completion_tokens": 35,
+              "total_tokens": 655,
+              "start_time": "2026-01-27T16:20:01.560073",
+              "end_time": "2026-01-27T16:20:03.558098"
+            },
+            "planner": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 14.638039112091064,
+              "prompt_tokens": 256,
+              "completion_tokens": 540,
+              "total_tokens": 796,
+              "start_time": "2026-01-27T16:20:03.559101",
+              "end_time": "2026-01-27T16:20:18.197139"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 27.411354780197144,
+              "prompt_tokens": 791,
+              "completion_tokens": 58,
+              "total_tokens": 849,
+              "start_time": "2026-01-27T16:20:18.198148",
+              "end_time": "2026-01-27T16:20:45.609502"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 4.466517210006714,
+              "prompt_tokens": 1200,
+              "completion_tokens": 145,
+              "total_tokens": 1345,
+              "start_time": "2026-01-27T16:20:45.610479",
+              "end_time": "2026-01-27T16:20:50.076997"
+            }
+          },
+          "plan": "1. **Identificação das afirmações factuais:**\n   - \"Gastar dinheiro público\"\n   - \"campanha de incentivo ao aborto\"\n   - \"ideologia de gênero\"\n   - \"troca de sexo de crianças\"\n\n2. **Listagem das bases factuais a serem verificadas:**\n\n   - Campanha de incentivo ao aborto:\n     - Data da campanha\n     - Organização responsável pela campanha\n     - Número de pessoas envolvidas na campanha\n\n   - Ideologia de gênero:\n     - Definição do que é \"ideologia de gênero\"\n     - Exemplos de políticas ou programas relacionados à ideologia de gênero\n\n   - Troca de sexo de crianças:\n     - Data da troca\n     - Local onde ocorreu a troca\n     - Participantes da troca (pessoas, organizações)\n\n3. **Priorização das afirmações críticas:**\n\n   - Campanha de incentivo ao aborto: Esta é uma questão política e ética complexa que requer investigação sobre o contexto histórico, políticos envolvidos e impactos sociais.\n   \n   - Ideologia de gênero: Este é um tema polêmico e pode implicar pesquisas em relação a legislação nacional, estudos acadêmicos e relatórios oficiais.\n\n   - Troca de sexo de crianças: Esta é uma situação extremamente grave que requer investigação detalhada sobre o contexto histórico, políticas governamentais e repercussões sociais. Além disso, pode implicar pesquisas em relação a legislação internacional, relatórios internacionais e estudos acadêmicos.\n\n4. **Plano estruturado para pesquisas posteriores:**\n\n   - **Campanha de incentivo ao aborto:** Pesquisa histórica sobre o contexto histórico da campanha, entrevistas com políticos envolvidos, análise de relatórios oficiais e estudos acadêmicos.\n   \n   - **Ideologia de gênero:** Estudo em relação a legislação nacional, relatórios internacionais, pesquisas acadêmicas sobre o tema e análises históricas.\n\n   - **Troca de sexo de crianças:** Pesquisa histórica sobre o contexto histórico da situação, entrevistas com organizações envolvidas na troca, análise de relatórios oficiais e estudos acadêmicos.",
+          "response": {
+            "score": 0.8,
+            "justification": "As pesquisas indicam que há campanhas de conscientização sobre o aborto financiadas por governos, mas não necessariamente incentivando o ato. A 'ideologia de gênero' é uma expressão usada por críticos, não um termo oficialmente reconhecido. A afirmação sobre crianças de 4 anos fazendo cirurgia de mudança de sexo é altamente improvável e não é corroborada por nenhuma fonte confiável. Portanto, o post parece distorcer e exagerar as informações para criar uma narrativa alarmante."
+          }
+        }
+      },
+      "researcher": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.3543968200683594,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:20:50.081515",
+              "end_time": "2026-01-27T16:20:51.435912"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.3636987209320068,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:20:51.436914",
+              "end_time": "2026-01-27T16:20:52.800613"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 9.00713586807251,
+              "prompt_tokens": 226,
+              "completion_tokens": 348,
+              "total_tokens": 574,
+              "start_time": "2026-01-27T16:20:52.801617",
+              "end_time": "2026-01-27T16:21:01.808753"
+            },
+            "researcher": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 15.175796031951904,
+              "prompt_tokens": 557,
+              "completion_tokens": 117,
+              "total_tokens": 674,
+              "start_time": "2026-01-27T16:21:01.810260",
+              "end_time": "2026-01-27T16:21:16.986056"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 4.666130304336548,
+              "prompt_tokens": 972,
+              "completion_tokens": 115,
+              "total_tokens": 1087,
+              "start_time": "2026-01-27T16:21:16.987056",
+              "end_time": "2026-01-27T16:21:21.653186"
+            }
+          },
+          "plan": "Afirmação factual presente no post: \"Cloroquina cura COVID\"\n\nBases factuais que precisam ser verificadas para validar a afirmação:\n\n1. Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19?\n2. A cloroquina é aprovada por organizações de saúde globais (como a Organização Mundial da Saúde, o Centro de Controle e Prevenção de Doenças dos EUA, a Agência Europeia de Medicamentos, etc.) para o tratamento de COVID-19?\n3. Existem relatórios de casos de pacientes com COVID-19 que foram curados após o uso de cloroquina?\n\nAfirmação mais crítica: Existem estudos científicos confiáveis que comprovam que a cloroquina cura COVID-19?\n\nPlano estruturado para pesquisas posteriores:\n\n1. Pesquisar em bases de dados científicas (como PubMed, ScienceDirect, etc.) por estudos que investigam a eficácia da cloroquina no tratamento de COVID-19.\n2. Verificar as diretrizes e declarações oficiais de organizações de saúde globais sobre o uso de cloroquina para COVID-19.\n3. Procurar por relatórios de casos de pacientes com COVID-19 tratados com cloroquina em revistas médicas e de saúde confiáveis.\n4. Verificar as fontes de notícias confiáveis para relatórios sobre a eficácia da cloroquina no tratamento de COVID-19.",
+          "response": {
+            "score": 1.0,
+            "justification": "As pesquisas realizadas não encontraram evidências científicas confiáveis que comprovem que a cloroquina cura COVID-19. Além disso, organizações de saúde globais, como a Organização Mundial da Saúde, não aprovaram o uso de cloroquina para o tratamento de COVID-19. Portanto, a afirmação de que 'Cloroquina cura COVID' é muito provável que seja fake news."
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz alegações sobre políticas públicas e uso de dinheiro público, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.6344287395477295,
+              "prompt_tokens": 620,
+              "completion_tokens": 35,
+              "total_tokens": 655,
+              "start_time": "2026-01-27T16:21:21.658178",
+              "end_time": "2026-01-27T16:21:23.292607"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 15.442907094955444,
+              "prompt_tokens": 259,
+              "completion_tokens": 408,
+              "total_tokens": 667,
+              "start_time": "2026-01-27T16:21:23.293602",
+              "end_time": "2026-01-27T16:21:38.736509"
+            },
+            "researcher": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 19.439168691635132,
+              "prompt_tokens": 611,
+              "completion_tokens": 120,
+              "total_tokens": 731,
+              "start_time": "2026-01-27T16:21:38.738531",
+              "end_time": "2026-01-27T16:21:58.177700"
+            },
+            "analyst": {
+              "base_model": "gpt-4",
+              "execution_time": 3.8020055294036865,
+              "prompt_tokens": 1260,
+              "completion_tokens": 131,
+              "total_tokens": 1391,
+              "start_time": "2026-01-27T16:21:58.178695",
+              "end_time": "2026-01-27T16:22:01.980700"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n- Todas as três afirmações são igualmente críticas. Se qualquer uma delas for falsa, a afirmação geral do post seria invalidada.\n\nPlano estruturado para pesquisas posteriores:\n1. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo ao aborto.\n2. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo à ideologia de gênero.\n3. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos com campanhas de incentivo à troca de sexo de crianças.\n4. Verificar a legislação local e nacional sobre o uso de fundos públicos para esses fins.\n5. Consultar especialistas em políticas públicas e direito para entender melhor o contexto e a legalidade desses gastos.",
+          "response": {
+            "score": 1.0,
+            "justification": "As pesquisas realizadas não forneceram evidências de que o dinheiro público está sendo gasto com campanhas de incentivo ao aborto, ideologia de gênero ou troca de sexo de crianças. As principais despesas públicas identificadas estão relacionadas a benefícios previdenciários e a proposta inicial do governo para os ministérios do setor de mulheres, igualdade racial e direitos humanos. Portanto, as afirmações do post são muito prováveis de serem fake news."
+          }
+        }
+      },
+      "analyst": {
+        "irrelevant_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": false,
+            "reasoning": "Apenas uma saudação, sem afirmações factuais verificáveis"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.6018190383911133,
+              "prompt_tokens": 585,
+              "completion_tokens": 30,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:22:01.983712",
+              "end_time": "2026-01-27T16:22:03.585531"
+            }
+          }
+        },
+        "fake_news_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "Contém afirmação verificável sobre eficácia médica"
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.966172695159912,
+              "prompt_tokens": 587,
+              "completion_tokens": 28,
+              "total_tokens": 615,
+              "start_time": "2026-01-27T16:22:03.588508",
+              "end_time": "2026-01-27T16:22:05.554681"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 18.485535621643066,
+              "prompt_tokens": 226,
+              "completion_tokens": 439,
+              "total_tokens": 665,
+              "start_time": "2026-01-27T16:22:05.555695",
+              "end_time": "2026-01-27T16:22:24.041231"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 8.01677656173706,
+              "prompt_tokens": 675,
+              "completion_tokens": 70,
+              "total_tokens": 745,
+              "start_time": "2026-01-27T16:22:24.041786",
+              "end_time": "2026-01-27T16:22:32.058562"
+            },
+            "analyst": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 12.99283742904663,
+              "prompt_tokens": 1807,
+              "completion_tokens": 155,
+              "total_tokens": 1962,
+              "start_time": "2026-01-27T16:22:32.060089",
+              "end_time": "2026-01-27T16:22:45.052926"
+            }
+          },
+          "plan": "Afirmação factual presente no post: \"Cloroquina cura COVID\"\n\nBases factuais que precisam ser verificadas para validar a afirmação:\n\n1. Verificar se há estudos científicos confiáveis que comprovem que a cloroquina cura COVID-19.\n2. Verificar as diretrizes e declarações de organizações de saúde confiáveis, como a Organização Mundial da Saúde (OMS) e o Centro de Controle e Prevenção de Doenças (CDC), sobre o uso da cloroquina no tratamento da COVID-19.\n3. Verificar se há consenso na comunidade médica e científica sobre a eficácia da cloroquina no tratamento da COVID-19.\n4. Verificar se a cloroquina é aprovada para o tratamento da COVID-19 pelas autoridades reguladoras de medicamentos, como a Food and Drug Administration (FDA) nos EUA ou a Agência Nacional de Vigilância Sanitária (ANVISA) no Brasil.\n\nAfirmação mais crítica: A afirmação de que a cloroquina cura COVID-19 é a mais crítica, pois se for falsa, invalida completamente o post.\n\nPlano estruturado para pesquisas posteriores:\n\n1. Pesquisar em bases de dados de estudos científicos, como PubMed, para encontrar pesquisas sobre a eficácia da cloroquina no tratamento da COVID-19.\n2. Consultar os sites e publicações oficiais da OMS, CDC, FDA, ANVISA e outras organizações de saúde relevantes para verificar suas posições sobre o uso da cloroquina no tratamento da COVID-19.\n3. Pesquisar em fontes de notícias confiáveis para encontrar declarações de especialistas médicos e científicos sobre o assunto.\n4. Verificar as informações de bula e aprovação de medicamentos para a cloroquina em sites de autoridades reguladoras de medicamentos.",
+          "response": {
+            "score": 0.5,
+            "justification": "O post afirma que 'Cloroquina cura COVID', mas não há evidências confiáveis encontradas nas bases de dados de estudos científicos, na OMS, CDC, FDA e ANVISA ou em fontes médicas confiáveis. Além disso, a cloroquina é apenas uma das várias terapias investigadas para o tratamento da COVID-19, sem evidências suficientes que comprovem sua eficácia. Portanto, embora não possa ser considerado 100% falsa, a afirmação apresentada no post tem um score de 50%. "
+          }
+        },
+        "political_1": {
+          "success": true,
+          "relevance_analysis": {
+            "relevant": true,
+            "reasoning": "O post faz uma afirmação sobre políticas públicas e gastos governamentais, que são verificáveis."
+          },
+          "metrics": {
+            "entry": {
+              "base_model": "gpt-4",
+              "execution_time": 1.662532091140747,
+              "prompt_tokens": 620,
+              "completion_tokens": 37,
+              "total_tokens": 657,
+              "start_time": "2026-01-27T16:22:45.053951",
+              "end_time": "2026-01-27T16:22:46.716483"
+            },
+            "planner": {
+              "base_model": "gpt-4",
+              "execution_time": 14.870713233947754,
+              "prompt_tokens": 259,
+              "completion_tokens": 442,
+              "total_tokens": 701,
+              "start_time": "2026-01-27T16:22:46.718469",
+              "end_time": "2026-01-27T16:23:01.589182"
+            },
+            "researcher": {
+              "base_model": "gpt-4",
+              "execution_time": 16.247148752212524,
+              "prompt_tokens": 678,
+              "completion_tokens": 137,
+              "total_tokens": 815,
+              "start_time": "2026-01-27T16:23:01.590215",
+              "end_time": "2026-01-27T16:23:17.837364"
+            },
+            "analyst": {
+              "base_model": "qwen2.5:1.5b",
+              "execution_time": 10.25995683670044,
+              "prompt_tokens": 1769,
+              "completion_tokens": 117,
+              "total_tokens": 1886,
+              "start_time": "2026-01-27T16:23:17.840351",
+              "end_time": "2026-01-27T16:23:28.100308"
+            }
+          },
+          "plan": "Afirmações factuais presentes no post:\n1. Dinheiro público está sendo gasto com campanhas de incentivo ao aborto.\n2. Dinheiro público está sendo gasto com campanhas de incentivo à ideologia de gênero.\n3. Dinheiro público está sendo gasto com campanhas de incentivo à troca de sexo de crianças.\n\nBases factuais que precisam ser verificadas para validar cada afirmação:\n1. Verificar se há registros de gastos públicos com campanhas de incentivo ao aborto.\n2. Verificar se há registros de gastos públicos com campanhas de incentivo à ideologia de gênero.\n3. Verificar se há registros de gastos públicos com campanhas de incentivo à troca de sexo de crianças.\n\nAfirmações mais críticas que, se falsas, invalidariam o post:\n- Todas as três afirmações são igualmente críticas. Se qualquer uma delas for falsa, a afirmação geral do post seria invalidada.\n\nPlano estruturado para pesquisas posteriores:\n1. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos registrados em campanhas de incentivo ao aborto.\n2. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos registrados em campanhas de incentivo à ideologia de gênero.\n3. Pesquisar em registros governamentais e relatórios de gastos públicos para verificar se há gastos registrados em campanhas de incentivo à troca de sexo de crianças.\n4. Verificar a legislação local e nacional sobre o aborto, a ideologia de gênero e a troca de sexo em crianças para entender o contexto legal dessas questões.\n5. Consultar fontes de notícias confiáveis e relatórios de organizações de direitos humanos para obter informações adicionais sobre essas questões.",
+          "response": {
+            "score": 0.9,
+            "justification": "O post apresenta afirmações críticas sobre gastos públicos com campanhas relacionadas ao aborto, ideologia de gênero e troca de sexo em crianças. As bases factuais necessárias para validar essas afirmações são raras ou inexistentes na internet. Além disso, a falta de evidências confiáveis sugere uma possível manipulação do conteúdo original. A probabilidade é alta que o post seja fake news."
+          }
+        }
+      }
+    }
+  }
+}
