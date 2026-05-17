@@ -28,4 +28,5 @@ class AgentState(BaseModel):
     generated_queries: List[str] = Field(default=[])
     sent_queries: List[str] = Field(default=[])
     tavily_received_queries: List[str] = Field(default=[])
+    tavily_trace: List[dict] = Field(default=[])
     query_fallback_used: bool = Field(default=False)

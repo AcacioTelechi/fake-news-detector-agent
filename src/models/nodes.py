@@ -1,4 +1,5 @@
 import re
+import time
 
 from src.models.prompts import (
     ENTRY_PROMPT,
@@ -149,17 +150,30 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
     all_responses = []
     errors: list[str] = []
     received: list[str] = []
+    tavily_trace: list[dict] = []  # resultado por query: visível no log de debug
     for q in safe_queries:
+        t0 = time.perf_counter()
         try:
             response = runtime.context.tavily.search(query=q, max_results=2)
         except Exception as e:  # quota, rede, query inválida — não derruba o pipeline
-            errors.append(f"{type(e).__name__}: {e}")
+            elapsed = round(time.perf_counter() - t0, 2)
+            msg = f"{type(e).__name__}: {e}"
+            errors.append(msg)
+            tavily_trace.append(
+                {"query": q, "results": None, "error": msg, "elapsed_s": elapsed}
+            )
             continue
+        elapsed = round(time.perf_counter() - t0, 2)
+        results = response.get("results", []) or []
         # o Tavily ecoa a query recebida: cross-check do que de fato chegou
         received.append(response.get("query", q))
-        for r in response.get("results", []):
+        for r in results:
             content.append(r["content"])
         all_responses.append(response)
+        tavily_trace.append(
+            {"query": q, "results": len(results), "error": None,
+             "elapsed_s": elapsed}
+        )
 
     research_failed = len(content) == initial_len  # nenhuma evidência nova obtida
 
@@ -171,6 +185,7 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
         "generated_queries": generated,
         "sent_queries": safe_queries,
         "tavily_received_queries": received,
+        "tavily_trace": tavily_trace,
         "query_fallback_used": query_fallback_used,
     }
 

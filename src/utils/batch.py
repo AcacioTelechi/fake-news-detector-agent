@@ -173,6 +173,7 @@ def analyze_post(
         "generated_queries": resp.get("generated_queries") or [],
         "sent_queries": resp.get("sent_queries") or [],
         "tavily_received_queries": resp.get("tavily_received_queries") or [],
+        "tavily_trace": resp.get("tavily_trace") or [],
         "query_fallback_used": bool(resp.get("query_fallback_used")),
         "metrics": metrics,
     }
@@ -206,6 +207,17 @@ def _debug_block(rec: dict) -> str:
         lines.append(f"    generated_queries: {rec.get('generated_queries')}")
         lines.append(f"    sent_queries: {rec.get('sent_queries')}")
         lines.append(f"    tavily_received: {rec.get('tavily_received_queries')}")
+        trace = rec.get("tavily_trace") or []
+        if trace:
+            parts = []
+            for t in trace:
+                q = _truncate(t.get("query"), 45)
+                if t.get("error"):
+                    parts.append(f"'{q}'→ERR {t['error'][:50]}({t.get('elapsed_s')}s)")
+                else:
+                    parts.append(f"'{q}'→{t.get('results')}res({t.get('elapsed_s')}s)")
+            total = round(sum(t.get("elapsed_s") or 0 for t in trace), 2)
+            lines.append(f"    tavily: {' | '.join(parts)}  [total {total}s]")
     if rec.get("research_errors"):
         lines.append(f"    research_errors: {rec.get('research_errors')}")
     if rec.get("score") is not None:

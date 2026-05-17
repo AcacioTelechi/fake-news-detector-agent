@@ -51,6 +51,28 @@ class _Tavily:
         return {"query": query, "results": [{"content": f"RES::{query}"}]}
 
 
+class _TavilyEmpty:
+    """Responde 200 mas sem resultados (falha 'mole' do Tavily)."""
+
+    def __init__(self):
+        self.calls = []
+
+    def search(self, query, max_results=2):
+        self.calls.append((query, max_results))
+        return {"query": query, "results": []}
+
+
+class _TavilyRaising:
+    """Lança como o Tavily faz em cota/rede."""
+
+    def __init__(self):
+        self.calls = []
+
+    def search(self, query, max_results=2):
+        self.calls.append((query, max_results))
+        raise RuntimeError("Forbidden: exceeds your plan's set usage limit")
+
+
 class _Ctx:
     pass
 
@@ -60,8 +82,8 @@ class _Runtime:
         self.context = ctx
 
 
-def _run(payload, plan="plano de verificação"):
-    tav = _Tavily()
+def _run(payload, plan="plano de verificação", tavily=None):
+    tav = tavily if tavily is not None else _Tavily()
     ctx = _Ctx()
     ctx.models_registry = _Registry(payload)
     ctx.tavily = tav
@@ -139,9 +161,57 @@ def test_no_fallback_when_post_and_plan_unusable():
     print("OK: sem post/plano -> sem fallback, research_failed=True (honesto)")
 
 
+def test_tavily_trace_records_results_and_timing():
+    out, _ = _run(Queries(queries=["São Paulo eleição 2024"]))
+    tr = out["tavily_trace"]
+    assert len(tr) == 1, tr
+    assert tr[0]["query"] == "São Paulo eleição 2024"
+    assert tr[0]["results"] == 1 and tr[0]["error"] is None
+    assert isinstance(tr[0]["elapsed_s"], (int, float))
+    print("OK: tavily_trace registra query, nº de resultados e tempo")
+
+
+def test_tavily_empty_results_is_visible():
+    out, _ = _run(Queries(queries=["query sem retorno"]), tavily=_TavilyEmpty())
+    tr = out["tavily_trace"]
+    assert tr[0]["results"] == 0 and tr[0]["error"] is None, tr
+    assert out["research_failed"] is True
+    assert out["research_errors"] == [], "0 resultados não é 'erro', mas fica visível na trace"
+    print("OK: Tavily 200 com 0 resultados -> visível na trace (results=0)")
+
+
+def test_tavily_exception_is_traced():
+    out, _ = _run(Queries(queries=["q"]), tavily=_TavilyRaising())
+    tr = out["tavily_trace"]
+    assert tr[0]["results"] is None and "Forbidden" in tr[0]["error"], tr
+    assert any("Forbidden" in e for e in out["research_errors"])
+    assert out["research_failed"] is True
+    print("OK: exceção do Tavily -> trace com erro + research_errors")
+
+
+def test_debug_block_renders_tavily_line():
+    from src.utils.batch import _debug_block
+    out, _ = _run(Queries(queries=["São Paulo eleição 2024"]))
+    rec = {
+        "id_mention": "X", "success": True, "relevant": True,
+        "full_text": "t", "generated_queries": out["generated_queries"],
+        "sent_queries": out["sent_queries"],
+        "tavily_received_queries": out["tavily_received_queries"],
+        "tavily_trace": out["tavily_trace"], "metrics": {},
+    }
+    block = _debug_block(rec)
+    assert "tavily: 'São Paulo eleição 2024'→1res(" in block, block
+    assert "[total" in block
+    print("OK: bloco de debug renderiza a linha 'tavily:' com res/tempo")
+
+
 if __name__ == "__main__":
     test_happy_path_and_sanitization()
     test_structured_output_failure_triggers_fallback()
     test_all_queries_invalid_falls_back_to_post()
     test_no_fallback_when_post_and_plan_unusable()
+    test_tavily_trace_records_results_and_timing()
+    test_tavily_empty_results_is_visible()
+    test_tavily_exception_is_traced()
+    test_debug_block_renders_tavily_line()
     print("\nTODOS OS TESTES DE ENCANAMENTO PASSARAM")
