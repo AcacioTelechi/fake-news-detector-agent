@@ -1,0 +1,10 @@
+# Dependências do pipeline de verificação de fake news.
+# Instale com:  .venv/bin/pip install -r requirements.txt
+langgraph
+langchain
+langchain-core
+langchain-ollama
+langchain-openai
+tavily-python
+python-dotenv
+pydantic

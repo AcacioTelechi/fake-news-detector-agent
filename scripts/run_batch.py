@@ -105,11 +105,19 @@ def main() -> int:
     print("\n" + "=" * 60)
     print(f"FIM. Processados nesta execução: {summary['processed']:,} "
           f"em {summary['duration_s']/60:.1f} min")
-    print(f"  relevantes: {summary['relevant']} | "
+    print(f"  erros (success=False): {summary['errored']} | "
+          f"relevantes: {summary['relevant']} | "
           f"inconclusivos: {summary['inconclusive']} | "
           f"erros de cota: {summary['quota_errors']}")
-    print(f"  total acumulado: {len(processed) + summary['processed']:,}")
+    print(f"  total acumulado (OK): {len(processed) + summary['processed'] - summary['errored']:,}")
     print(f"  JSONL: {summary['out_jsonl']}")
+    if summary["errored"] == summary["processed"] and summary["processed"] > 0:
+        print("  [!] TODOS falharam — verifique Ollama/modelos "
+              "(ollama pull qwen2.5:1.5b llama3.1:8b) ou as chaves do .env. "
+              "Os ids com erro serão reprocessados no próximo run (resume).")
+    elif summary["errored"]:
+        print(f"  [!] {summary['errored']} com erro de infra serão "
+              "reprocessados no próximo run (resume).")
     if summary["stopped_by_quota"]:
         print("  Parada por estouro de cota do Tavily — "
               "rode de novo (resume) após renovar a cota.")

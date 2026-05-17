@@ -46,11 +46,15 @@ def compact_jsonl(jsonl_path: str) -> set:
     """Compacta o JSONL garantindo idempotência no resume.
 
     - descarta linhas corrompidas (escrita interrompida por kill);
-    - mantém só o último registro válido por id_mention (dedupe);
+    - mantém só o último registro por id_mention (dedupe);
     - reescreve atomicamente (tmp + os.replace).
 
-    Reexecutar sobre um arquivo completo é no-op. Retorna o conjunto de
-    ids já processados.
+    Retorna apenas os ids com resultado terminal (`success` verdadeiro —
+    inclui inconclusivos, pois o grafo completou). Registros com
+    `success=False` (falha de infra: modelo ausente, rede, etc.) NÃO entram
+    no conjunto de processados: ficam no arquivo para auditoria mas serão
+    reprocessados no próximo run, e o registro bom sobrescreve o ruim
+    (último vence). Reexecutar sobre um arquivo todo-OK é no-op.
     """
     if not os.path.exists(jsonl_path):
         return set()
@@ -74,7 +78,7 @@ def compact_jsonl(jsonl_path: str) -> set:
         for rec in by_id.values():
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     os.replace(tmp, jsonl_path)
-    return set(by_id.keys())
+    return {mid for mid, rec in by_id.items() if rec.get("success")}
 
 
 def analyze_post(
@@ -189,7 +193,7 @@ def run_batches(
     n_batches = (len(posts) + batch_size - 1) // batch_size
     write_lock = threading.Lock()
     stop_event = threading.Event()
-    quota_errors = done = relevant_n = inconclusive_n = 0
+    quota_errors = done = relevant_n = inconclusive_n = errored_n = 0
 
     def _write(rec):
         with write_lock:
@@ -227,6 +231,8 @@ def run_batches(
                     }
                 _write(rec)
                 done += 1
+                if not rec.get("success"):
+                    errored_n += 1
                 if rec.get("relevant"):
                     relevant_n += 1
                 if rec.get("inconclusive"):
@@ -239,7 +245,8 @@ def run_batches(
                             f"({quota_errors} erros). Encerrando após drenar "
                             f"o lote atual…")
                 if done % 50 == 0:
-                    log(f"  {done:,} ok | relevantes {relevant_n} | "
+                    log(f"  {done:,} feitos | erros {errored_n} | "
+                        f"relevantes {relevant_n} | "
                         f"inconclusivos {inconclusive_n} | "
                         f"quota-err {quota_errors}")
         if stop_event.is_set():
@@ -247,6 +254,7 @@ def run_batches(
 
     return {
         "processed": done,
+        "errored": errored_n,
         "relevant": relevant_n,
         "inconclusive": inconclusive_n,
         "quota_errors": quota_errors,
