@@ -16,3 +16,11 @@ class AgentState(BaseModel):
     revision_number: int = Field(default=0)
     max_revisions: int = Field(default=3)
     metrics: Optional[Dict[str, Metrics]] = Field(default={})
+    # Sinaliza que o planner se recusou a responder ou devolveu plano vazio
+    plan_failed: bool = Field(default=False)
+    # Sinaliza que a etapa de pesquisa (Tavily) não conseguiu nenhum resultado
+    research_failed: bool = Field(default=False)
+    # Resultado não pôde ser apurado (não confundir com score 0.0)
+    inconclusive: bool = Field(default=False)
+    # Mensagens de erro coletadas durante a pesquisa (não derrubam o pipeline)
+    research_errors: List[str] = Field(default=[])
