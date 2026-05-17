@@ -119,21 +119,27 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
         ]
     )
 
+    # cru do LLM (pode vir None / objeto sem .queries se o structured output falhar)
+    generated = list(getattr(queries, "queries", None) or [])
+
     content = state.content
     if isinstance(content, str):
         content = [content]
     initial_len = len(content)
 
-    safe_queries = _sanitize_queries(queries.queries)
+    safe_queries = _sanitize_queries(generated)
 
     all_responses = []
     errors: list[str] = []
+    received: list[str] = []
     for q in safe_queries:
         try:
             response = runtime.context.tavily.search(query=q, max_results=2)
         except Exception as e:  # quota, rede, query inválida — não derruba o pipeline
             errors.append(f"{type(e).__name__}: {e}")
             continue
+        # o Tavily ecoa a query recebida: cross-check do que de fato chegou
+        received.append(response.get("query", q))
         for r in response.get("results", []):
             content.append(r["content"])
         all_responses.append(response)
@@ -145,6 +151,9 @@ def research_node(state: AgentState, runtime: Runtime[RuntimeContext]):
         "references": all_responses,
         "research_errors": errors,
         "research_failed": research_failed,
+        "generated_queries": generated,
+        "sent_queries": safe_queries,
+        "tavily_received_queries": received,
     }
 
 

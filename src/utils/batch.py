@@ -166,6 +166,10 @@ def analyze_post(
         "inconclusive": bool(resp.get("inconclusive")) if relevant else None,
         "research_failed": bool(resp.get("research_failed")) if relevant else None,
         "research_errors": resp.get("research_errors") or [],
+        # auditoria de queries (cru do LLM / enviado ao Tavily / ecoado de volta)
+        "generated_queries": resp.get("generated_queries") or [],
+        "sent_queries": resp.get("sent_queries") or [],
+        "tavily_received_queries": resp.get("tavily_received_queries") or [],
         "metrics": metrics,
     }
 

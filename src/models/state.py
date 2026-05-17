@@ -24,3 +24,7 @@ class AgentState(BaseModel):
     inconclusive: bool = Field(default=False)
     # Mensagens de erro coletadas durante a pesquisa (não derrubam o pipeline)
     research_errors: List[str] = Field(default=[])
+    # Auditoria das queries: cru do LLM, o que foi enviado, o que o Tavily ecoou
+    generated_queries: List[str] = Field(default=[])
+    sent_queries: List[str] = Field(default=[])
+    tavily_received_queries: List[str] = Field(default=[])
